@@ -1,8 +1,11 @@
 #include "MathLib/Types/Vec4.h"
+#include "MathLib/MathFunctions.h"
+
 
 namespace MathLib
 {
 	Vec4::Vec4()
+		
 	{
 	}
 

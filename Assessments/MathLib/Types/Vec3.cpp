@@ -1,38 +1,54 @@
 #include "MathLib/Types/Vec3.h"
 
+#include "MathLib/Types/Vec2.h"
+#include "MathLib/MathFunctions.h"
+
 namespace MathLib
 {
 	Vec3::Vec3()
+		: x{ 0.f }, y{ 0.f }, z{ 0.f }
 	{
 	}
 
 	Vec3::Vec3(float _scalar)
+		: x{ _scalar }, y{ _scalar }, z{ _scalar }
 	{
 	}
 
 	Vec3::Vec3(float _x, float _y, float _z)
+		: x{ _x }, y{ _y }, z{ _z }
 	{
 	}
 
 	Vec3::Vec3(initializer_list<float> _values)
 	{
+		for (size_t i = 0; i < VEC_2_SIZE; ++i)
+		{
+			data[i] = *(_values.begin() + i);
+		}
 	}
 
 	Vec3::Vec3(Vector3 _vector)
+		: x{ _vector.x }, y{ _vector.y }, z{ _vector.z }
 	{
 	}
 
 	Vec3::Vec3(const Vec3& _other)
+		: x{ _other.x }, y{ _other.y}
 	{
 	}
 
 	Vec3::Vec3(Vec3&& _other) noexcept
+		: x{ _other.x }, y{ _other.y }
 	{
+
+		_other.x = 0.f;
+		_other.y = 0.f;
+		_other.z = 0.f;
+
 	}
 
-	Vec3::~Vec3()
-	{
-	}
+	Vec3::~Vec3() = default;
 
 	Vec3 Vec3::Add(const Vec3& _lhs, const Vec3& _rhs)
 	{
@@ -110,17 +126,17 @@ namespace MathLib
 
 	Vec3::operator Vector3() const
 	{
-		return {};
+		return { x, y, z };
 	}
 
 	bool Vec3::operator==(const Vec3& _other) const
 	{
-		return false;
+		return Compare(x, _other.x) && Compare(y, _other.y) && Compare(z, _other.z);
 	}
 
 	bool Vec3::operator!=(const Vec3& _other) const
 	{
-		return false;
+		return !(*this == _other);
 	}
 
 	Vec3 Vec3::operator-(const Vec3& _other) const
@@ -155,11 +171,29 @@ namespace MathLib
 
 	Vec3& Vec3::operator=(const Vec3& _other)
 	{
+		if (*this == _other)
+			return *this;
+
+		x = _other.x;
+		y = _other.y;
+		z = _other.z;
+
 		return *this;
 	}
 
 	Vec3& Vec3::operator=(Vec3&& _other) noexcept
 	{
+		if (*this == _other)
+			return *this;
+
+		x = _other.x;
+		y = _other.y;
+		z = _other.z;
+
+		_other.x = 0.f;
+		_other.y = 0.f;
+		_other.z = 0.f;
+
 		return *this;
 	}
 }

@@ -1,38 +1,48 @@
 #include "MathLib/Types/Vec2.h"
-
+#include "MathLib/MathFunctions.h"
 namespace MathLib
 {
 	Vec2::Vec2()
+		: x{ 0.f }, y{ 0.f }
 	{
 	}
 
 	Vec2::Vec2(float _scalar)
+		: x{ _scalar }, y{ _scalar }
 	{
 	}
 
 	Vec2::Vec2(float _x, float _y)
+		: x{ _x }, y{ _y }
 	{
 	}
 
 	Vec2::Vec2(initializer_list<float> _values)
 	{
+		for (size_t i = 0; i < VEC_2_SIZE; ++i)
+		{
+			data[i] = *(_values.begin() + i);
+		}
 	}
 
 	Vec2::Vec2(Vector2 _pos)
+		: x{ _pos.x }, y{ _pos.y }
 	{
 	}
 
 	Vec2::Vec2(const Vec2& _other)
+		: x{ _other.x }, y{ _other.y }
 	{
 	}
 
 	Vec2::Vec2(Vec2&& _other) noexcept
+		: x{ _other.x }, y{ _other.y }
 	{
+		_other.x = 0.f;
+		_other.y = 0.f;
 	}
 
-	Vec2::~Vec2()
-	{
-	}
+	Vec2::~Vec2() = default;
 
 	Vec2 Vec2::Add(const Vec2& _lhs, const Vec2& _rhs)
 	{
@@ -118,17 +128,17 @@ namespace MathLib
 
 	Vec2::operator Vector2() const
 	{
-		return {};
+		return { x, y };
 	}
 
 	bool Vec2::operator==(const Vec2& _other) const
 	{
-		return false;
+		return Compare(x, _other.x) && Compare(y, _other.y);
 	}
 
 	bool Vec2::operator!=(const Vec2& _other) const
 	{
-		return false;
+		return !(*this == _other);
 	}
 
 	Vec2 Vec2::operator-(const Vec2& _other) const
@@ -173,16 +183,37 @@ namespace MathLib
 
 	Vec2& Vec2::operator=(const Vec2& _other)
 	{
+
+		if (*this == _other)
+			return *this;
+
+		x = _other.x;
+		y = _other.y;
+
 		return *this;
 	}
 
 	Vec2& Vec2::operator=(Vec2&& _other) noexcept
 	{
+
+		if (*this == _other)
+			return *this;
+
+		x = _other.x;
+		y = _other.y;
+
+		_other.x = 0.f;
+		_other.y = 0.f;
+
 		return *this;
 	}
 
 	Vec2& Vec2::operator=(Vector2 _other)
 	{
+
+		x = _other.x;
+		y = _other.y;
+
 		return *this;
 	}
 
