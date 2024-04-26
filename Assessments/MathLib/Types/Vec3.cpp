@@ -22,7 +22,7 @@ namespace MathLib
 
 	Vec3::Vec3(initializer_list<float> _values)
 	{
-		for (size_t i = 0; i < VEC_2_SIZE; ++i)
+		for (size_t i = 0; i < VEC_3_SIZE; ++i)
 		{
 			data[i] = *(_values.begin() + i);
 		}

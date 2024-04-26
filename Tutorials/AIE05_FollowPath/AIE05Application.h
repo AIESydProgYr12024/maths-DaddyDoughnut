@@ -1,6 +1,12 @@
 #pragma once
 
 #include <raylib/raylib.h>
+#include <vector>
+#include "MathLib/Types/Vec2.h"
+
+using std::vector;
+using MathLib::Vec2;
+
 
 class AIE05Application
 {
@@ -20,6 +26,10 @@ private:
 	bool m_running;
 	Color m_clearColor;
 
+	vector<Vec2> m_path;
+
+	Vec2 m_playerPos;
+
 private:
 	void BeginPlay();
 
@@ -27,5 +37,8 @@ private:
 	void Render(AIE05Application* _app);
 
 	void EndPlay();
+
+	void DrawPlayer();
+	void DrawPath();
 
 };

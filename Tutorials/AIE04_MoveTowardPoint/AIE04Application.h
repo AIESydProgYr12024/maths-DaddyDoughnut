@@ -2,6 +2,10 @@
 
 #include <raylib/raylib.h>
 
+#include "MathLib/Types/Vec2.h"
+
+using MathLib::Vec2;
+
 class AIE04Application
 {
 public:
@@ -20,6 +24,9 @@ private:
 	bool m_running;
 	Color m_clearColor;
 
+	MathLib::Vec2 m_playerPos;
+	MathLib::Vec2 m_TargetPos;
+
 private:
 	void BeginPlay();
 
@@ -28,4 +35,6 @@ private:
 
 	void EndPlay();
 
+	void DrawPlayer();
+	void DrawTarget();
 };

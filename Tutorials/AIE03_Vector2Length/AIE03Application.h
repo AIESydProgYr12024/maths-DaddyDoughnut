@@ -1,6 +1,11 @@
 #pragma once
 
 #include <raylib/raylib.h>
+#include <vector>
+#include "MathLib/Types/Vec2.h"
+
+using std::vector;
+using MathLib::Vec2;
 
 class AIE03Application
 {
@@ -20,6 +25,8 @@ private:
 	bool m_running;
 	Color m_clearColor;
 
+	vector<Vec2> m_points;
+	float m_totalLength;
 private:
 	void BeginPlay();
 

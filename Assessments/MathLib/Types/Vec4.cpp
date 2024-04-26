@@ -5,20 +5,25 @@
 namespace MathLib
 {
 	Vec4::Vec4()
-		
+		: x{ 0.f }, y{ 0.f }, z{ 0.f }, w{ 0.f }
 	{
 	}
 
 	Vec4::Vec4(float _scalar)
+		: x{ _scalar }, y{ _scalar }, z{ _scalar }, w{ _scalar }
 	{
 	}
 
 	Vec4::Vec4(float _x, float _y, float _z, float _w)
+		: x{ _x }, y{ _y }, z{ _z }, w{ _w }
 	{
 	}
 
 	Vec4::Vec4(initializer_list<float> _values)
 	{
+		for (size_t i = 0; i < VEC_4_SIZE; ++i)
+		{
+		}
 	}
 
 	Vec4::Vec4(Vector4 _value)

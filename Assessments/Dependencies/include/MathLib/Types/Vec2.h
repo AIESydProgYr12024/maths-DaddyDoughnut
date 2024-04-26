@@ -49,14 +49,22 @@ namespace MathLib
 		static Vec2 Normalised(const Vec2& _vec);
 		static float Distance(const Vec2& _a, const Vec2& _b);
 
-		static float Dot(const Vec2& _lhs, const Vec2& _rhs);
+		float Dot(const Vec2& _lhs, const Vec2& _rhs) const;
 
 		static Vec2 Lerp(const Vec2& _a, const Vec2& _b, float _t);
 
 		static Vec2 CreateRotationVector(float _radians);
 
+		float Dot(const Vec2& _rhs);
+
+		
+
 	public:
 		float Dot(const Vec2& _rhs) const;
+
+		float Magnitude(Vec2 _vec2) const;
+
+		float MagnitudeSqr(Vec2 _vec2) const;
 
 		float Magnitude() const;
 		float MagnitudeSqr() const;

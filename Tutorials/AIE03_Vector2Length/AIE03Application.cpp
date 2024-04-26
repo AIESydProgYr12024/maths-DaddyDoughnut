@@ -46,11 +46,31 @@ void AIE03Application::BeginPlay()
 
 void AIE03Application::Tick(float _dt, AIE03Application* _app)
 {
+	if(IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
+	{
+		m_points.emplace_back(GetMousePosition());
+
+		m_totalLength = 0;
+		for (size_t i = 1; i < m_points.size(); ++i)
+		{
+			m_totalLength += (m_points[i] - m_points[i - 1]).Magnitude();
+		}
+	}
 }
 
 void AIE03Application::Render(AIE03Application* _app)
 {
+	for (size_t i = 1; i < m_points.size(); ++i)
+	{
+		DrawLineV(m_points[i], m_points[i - 1], BLACK);
+	}
+
+	for(auto& p : m_points)
+	{
+		DrawCircleV(p, 3.f, BLACK);
+	}
 }
+
 
 void AIE03Application::EndPlay()
 {
