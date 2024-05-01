@@ -49,7 +49,7 @@ namespace MathLib
 		static Vec2 Normalised(const Vec2& _vec);
 		static float Distance(const Vec2& _a, const Vec2& _b);
 
-		float Dot(const Vec2& _lhs, const Vec2& _rhs) const;
+		static float Dot(const Vec2& _lhs, const Vec2& _rhs);
 
 		static Vec2 Lerp(const Vec2& _a, const Vec2& _b, float _t);
 

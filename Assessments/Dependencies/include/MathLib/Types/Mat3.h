@@ -14,17 +14,21 @@ namespace MathLib
 		{
 			struct
 			{
-				float m1;
-				float m2;
-				float m3;
-				float m4;
-				float m5;
-				float m6;
-				float m7;
-				float m8;
-				float m9;
-			};
+				
 
+				float m1; // 11
+				float m2; // 21
+				float m3; // 31
+				float m4; // 12
+				float m5; // 22
+				float m6; // 32
+				float m7; // 13
+				float m8; // 23
+				float m9; // 33
+			};
+			// 11 12 13
+			// 21 22 23
+			// 31 32 33
 			float data[MAT_3_SIZE];
 		};
 		

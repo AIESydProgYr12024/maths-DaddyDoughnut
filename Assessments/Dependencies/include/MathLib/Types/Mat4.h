@@ -14,24 +14,29 @@ namespace MathLib
 		{
 			struct
 			{
-				float m1;
-				float m2;
-				float m3;
-				float m4;
-				float m5;
-				float m6;
-				float m7;
-				float m8;
-				float m9;
-				float m10;
-				float m11;
-				float m12;
-				float m13;
-				float m14;
-				float m15;
-				float m16;
-			};
+				
 
+				float m1;  // 11
+				float m2;  // 21
+				float m3;  // 31
+				float m4;  // 41
+				float m5;  // 12
+				float m6;  // 22
+				float m7;  // 32
+				float m8;  // 42
+				float m9;  // 13
+				float m10; // 23
+				float m11; // 33
+				float m12; // 43
+				float m13; // 14
+				float m14; // 24
+				float m15; // 34
+				float m16; // 44
+			};
+			// 11 12 13 14
+			// 21 22 23 24
+			// 31 32 33 34
+			// 41 42 43 44
 			float data[MAT_4_SIZE];
 		};
 

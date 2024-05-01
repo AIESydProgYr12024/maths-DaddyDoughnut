@@ -1,6 +1,10 @@
 #pragma once
 
 #include <raylib/raylib.h>
+#include "MathLib/Matrix3Renderer.h"
+
+using MathLib::Mat3;
+using MathLib::Matrix3Renderer;
 
 class AIE13Application
 {
@@ -20,6 +24,8 @@ private:
 	bool m_running;
 	Color m_clearColor;
 
+	Mat3 m_matrix;
+	Matrix3Renderer* m_matrixRenderer;
 private:
 	void BeginPlay();
 

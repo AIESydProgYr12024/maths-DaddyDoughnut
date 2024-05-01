@@ -381,7 +381,7 @@ namespace MathLib
 		);
 
 		extraInfo.emplace_back(
-			"x scale: " + FloatStringPrecise(Vec2{ _mat.m4, _mat.m5 }.Magnitude(), 3),
+			"x scale: " + FloatStringPrecise(Vec2{ _mat.m1, _mat.m2 }.Magnitude(), 3),
 			[&, this]
 			{
 				const float len = sqrtf(_arr[0] * _arr[0] + _arr[1] * _arr[1]);
@@ -396,7 +396,7 @@ namespace MathLib
 		);
 
 		extraInfo.emplace_back(
-			"x scale: " + FloatStringPrecise(Vec2{ _mat.m4, _mat.m5 }.Magnitude(), 3),
+			"y scale: " + FloatStringPrecise(Vec2{ _mat.m4, _mat.m5 }.Magnitude(), 3),
 			[&, this]
 			{
 				const float len = sqrtf(_arr[3] * _arr[3] + _arr[4] * _arr[4]);

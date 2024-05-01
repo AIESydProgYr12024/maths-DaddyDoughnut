@@ -79,7 +79,7 @@ namespace MathLib
 		return (_a - _b).Magnitude();
 	}
 
-	float Vec2::Dot(const Vec2& _lhs, const Vec2& _rhs) const
+	float Vec2::Dot(const Vec2& _lhs, const Vec2& _rhs)
 	{
 		return (_lhs.x * _rhs.x) + (_lhs.y * _rhs.y);
 	}

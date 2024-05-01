@@ -2,6 +2,10 @@
 
 #include <raylib/raylib.h>
 
+#include <MathLib/Types/Vec2.h>
+
+using MathLib::Vec2;
+
 class AIE06Application
 {
 public:
@@ -20,6 +24,17 @@ private:
 	bool m_running;
 	Color m_clearColor;
 
+	Vec2 m_playerPos;
+	Vec2 m_playerMoveDir;
+	float m_playerMoveSpeed;
+
+	Rectangle m_finishLine;
+	Vec2 m_finishLineDir;
+
+	int m_lapCount;
+	bool m_isInside;
+
+
 private:
 	void BeginPlay();
 
@@ -27,5 +42,9 @@ private:
 	void Render(AIE06Application* _app);
 
 	void EndPlay();
+
+	void DrawUI();
+	void DrawPlayer();
+	void DrawFinishLine();
 
 };
