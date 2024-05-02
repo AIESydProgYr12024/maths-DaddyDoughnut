@@ -57,32 +57,80 @@ namespace MathLib
 
 	Mat3 Mat3::CreateTransform(const Vec2& _trans, float _rot, const Vec2* _scale, float _xRot, float _yRot)
 	{
+		const Vec2 scale = _scale != nullptr ? *_scale : Vec2{ 1.f, 1.f };
+
+		const Mat3 transMat = CreateTranslation(_trans);
+		const Mat3 scaleMat = CreateScale(scale);
+
+		const Mat3 xRotMat = CreateXRotation(_xRot);
+		const Mat3 yRotMat = CreateYRotation(_yRot);
+		const Mat3 zRotMat = CreateZRotation(_rot);
+		const Mat3 rotMat = xRotMat * yRotMat * zRotMat;
+
+		return transMat * rotMat * scaleMat;
+		
+
 		return {};
 	}
 
 	Mat3 Mat3::CreateTranslation(const Vec2& _trans)
 	{
-		return {};
+		return
+		{
+			1.f, 0.f, _trans.x,
+			0.f, 1.f, _trans.y,
+			0.f, 0.f, 1.f
+		};
 	}
 
 	Mat3 Mat3::CreateScale(const Vec2& _scale)
 	{
-		return {};
+		return
+		{
+			_scale.x, 0.f, 0.f,
+			0.f, _scale.y, 0.f,
+			0.f, 0.f, 1.f
+		};
 	}
 
 	Mat3 Mat3::CreateXRotation(float _rot)
 	{
-		return {};
+		const float cos = cosf(_rot);
+		const float sin = sinf(_rot);
+
+		return
+		{
+			1.f, 0.f, 0.f,
+			0.f, cos, -sin,
+			0.f, sin, cos
+		};
 	}
 
 	Mat3 Mat3::CreateYRotation(float _rot)
 	{
-		return {};
+		const float cos = cosf(_rot);
+		const float sin = sinf(_rot);
+
+		return
+		{
+			cos, 0.f, sin,
+			0.f, 1.f, 0.f,
+			-sin, 0.f, cos
+		};
+
 	}
 
 	Mat3 Mat3::CreateZRotation(float _rot)
 	{
-		return {};
+		const float cos = cosf(_rot);
+		const float sin = sinf(_rot);
+
+		return
+		{
+			cos, -sin, 0.f,
+			sin, cos, 0.f,
+			0.f, 0.f, 1.f
+		};
 	}
 
 	void Mat3::SetRotationX(float _rot)
@@ -106,6 +154,16 @@ namespace MathLib
 
 	void Mat3::SetRotationY(float _rot)
 	{
+		const float xLen = sqrtf(m1 * m1 + m2 * m2 + m3 * m3);
+		const float zLen = sqrtf(m7 * m7 + m8 * m8 + m9 * m9);
+
+		const float cos = cosf(_rot);
+		const float sin = sinf(_rot);
+
+		m5 = cos * xLen;
+		m8 = sin * zLen;
+		m6 = -sin * xLen;
+		m9 = cos * zLen;
 	}
 
 	float Mat3::GetRotationY() const
@@ -188,32 +246,89 @@ namespace MathLib
 
 	Mat3 Mat3::operator*(const Mat3& _rhs) const
 	{
-		return {};
+		return
+		{
+			m1 * _rhs.m1 + m2 * _rhs.m4 + m3 * _rhs.m7,
+			m4 * _rhs.m1 + m5 * _rhs.m4 + m6 * _rhs.m7,
+			m7 * _rhs.m1 + m8 * _rhs.m4 + m9 * _rhs.m7,
+			m1 * _rhs.m2 + m2 * _rhs.m5 + m3 * _rhs.m8,
+			m4 * _rhs.m2 + m5 * _rhs.m5 + m6 * _rhs.m8,
+			m7 * _rhs.m2 + m8 * _rhs.m5 + m9 * _rhs.m8,
+			m1 * _rhs.m3 + m2 * _rhs.m6 + m3 * _rhs.m9,
+			m4 * _rhs.m3 + m5 * _rhs.m6 + m6 * _rhs.m9,
+			m7 * _rhs.m3 + m8 * _rhs.m6 + m9 * _rhs.m9
+		};
 	}
 
 	Vec3 Mat3::operator*(const Vec3& _rhs) const
 	{
-		return {};
+		return
+		{
+			m1 * _rhs.x + m2 * _rhs.y + m3 * _rhs.z,
+			m4 * _rhs.x + m5 * _rhs.y + m6 * _rhs.z,
+			m7 * _rhs.x + m8 * _rhs.y + m9 * _rhs.z
+		};
 	}
 
 	bool Mat3::operator==(const Mat3& _other) const
 	{
 		
-		return false;
+		return
+		{
+			Compare(m1, _other.m1) && Compare(m1, _other.m1) && Compare(m1, _other.m1) &&
+			Compare(m1, _other.m1) && Compare(m1, _other.m1) && Compare(m1, _other.m1) &&
+			Compare(m1, _other.m1) && Compare(m1, _other.m1) && Compare(m1, _other.m1)
+		};
 	}
 
 	bool Mat3::operator!=(const Mat3& _other) const
 	{
-		return false;
+		return !(*this == _other);
 	}
 
 	Mat3& Mat3::operator=(const Mat3& _other)
 	{
+		if (*this == _other)
+			return *this;
+
+		m1 = _other.m1;
+		m2 = _other.m2;
+		m3 = _other.m3;
+		m4 = _other.m4;
+		m5 = _other.m5;
+		m6 = _other.m6;
+		m7 = _other.m7;
+		m8 = _other.m8;
+		m9 = _other.m9;
+
 		return *this;
 	}
 
 	Mat3& Mat3::operator=(Mat3&& _other) noexcept
 	{
+		if (*this == _other)
+			return *this;
+
+		m1 = _other.m1;
+		m2 = _other.m2;
+		m3 = _other.m3;
+		m4 = _other.m4;
+		m5 = _other.m5;
+		m6 = _other.m6;
+		m7 = _other.m7;
+		m8 = _other.m8;
+		m9 = _other.m9;
+
+		_other.m1 = 0.f;
+		_other.m2 = 0.f;
+		_other.m3 = 0.f;
+		_other.m4 = 0.f;
+		_other.m5 = 0.f;
+		_other.m6 = 0.f;
+		_other.m7 = 0.f;
+		_other.m8 = 0.f;
+		_other.m9 = 0.f;
+
 		return *this;
 	}
 }

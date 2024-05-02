@@ -1,6 +1,26 @@
 #pragma once
 
 #include <raylib/raylib.h>
+#include "MathLib/Matrix3Renderer.h"
+#include <vector>
+
+using MathLib::Vec2;
+using MathLib::Mat3;
+using MathLib::Matrix3Renderer;
+using std::vector;
+
+class MatrixMultiplyPair
+{
+public:
+	const char* label;
+	Mat3 a;
+	Mat3 b;
+
+public:
+	MatrixMultiplyPair(const char* _label, Mat3 _a, Mat3 _b);
+
+
+};
 
 class AIE14Application
 {
@@ -20,6 +40,14 @@ private:
 	bool m_running;
 	Color m_clearColor;
 
+	Mat3 m_matrixA;
+	Mat3 m_matrixB;
+	Mat3 m_matrixC;
+	Matrix3Renderer* m_renderer;
+
+	int m_currentIndex;
+
+	vector<MatrixMultiplyPair*> m_pairs;
 private:
 	void BeginPlay();
 
@@ -27,5 +55,9 @@ private:
 	void Render(AIE14Application* _app);
 
 	void EndPlay();
+
+	void Swap(Mat3& _a, Mat3& _b) const;
+	void UpdateSelectedMatrix();
+	void PopulateMatrixPairs();
 
 };
