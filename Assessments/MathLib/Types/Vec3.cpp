@@ -5,6 +5,16 @@
 
 namespace MathLib
 {
+	Vec3 Vec3::one = Vec3(1.f, 1.f, 1.f);
+	Vec3 Vec3::zero = Vec3(0.f, 0.f, 0.f);
+	Vec3 Vec3::half = Vec3(.5f, .5f, .5f);
+	Vec3 Vec3::up = Vec3(0.f, 1.f, 0.f);
+	Vec3 Vec3::down = Vec3(0.f, -1.f, 0.f);
+	Vec3 Vec3::left = Vec3(-1.f, 0.f, 0.f);
+	Vec3 Vec3::right = Vec3(1.f, 0.f, 0.f);
+	Vec3 Vec3::forward = Vec3(0.f, 0.f, 1.f);
+	Vec3 Vec3::back = Vec3(0.f, 0.f, -1.f);
+
 	Vec3::Vec3()
 		: x{ 0.f }, y{ 0.f }, z{ 0.f }
 	{

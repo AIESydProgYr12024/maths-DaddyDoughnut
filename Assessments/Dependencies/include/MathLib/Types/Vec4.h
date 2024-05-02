@@ -27,6 +27,16 @@ namespace MathLib
 
 			float data[VEC_4_SIZE];
 		};
+	public:
+		static Vec4 one;
+		static Vec4 zero;
+		static Vec4 half;
+		static Vec4 up;
+		static Vec4 down;
+		static Vec4 left;
+		static Vec4 right;
+		static Vec4 forward;
+		static Vec4 back;
 
 	public:
 		Vec4();

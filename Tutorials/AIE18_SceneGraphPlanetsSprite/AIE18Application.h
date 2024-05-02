@@ -2,6 +2,12 @@
 
 #include <raylib/raylib.h>
 
+#include "MathLib/Scene/SceneObject.h"
+
+using MathLib::SceneObject;
+
+class PlanetSceneObject;
+
 class AIE18Application
 {
 public:
@@ -19,6 +25,11 @@ private:
 
 	bool m_running;
 	Color m_clearColor;
+
+	SceneObject* m_world;
+	PlanetSceneObject* m_sun;
+	PlanetSceneObject* m_earth;
+	PlanetSceneObject* m_moon;
 
 private:
 	void BeginPlay();

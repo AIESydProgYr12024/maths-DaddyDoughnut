@@ -236,12 +236,20 @@ namespace MathLib
 
 	Vec2 Mat3::TransformPoint(const Vec2& _point) const
 	{
-		return {};
+		return
+		{
+			_point.x* m1 + _point.y * m4 + m7,
+			_point.x* m2 + _point.y * m5 + m8
+		};
 	}
 
 	Vec2 Mat3::TransformVector(const Vec2& _vec) const
 	{
-		return {};
+		return
+		{
+			_vec.x * m1 + _vec.y * m4,
+			_vec.x * m2 + _vec.y * m5
+		};
 	}
 
 	Mat3 Mat3::operator*(const Mat3& _rhs) const

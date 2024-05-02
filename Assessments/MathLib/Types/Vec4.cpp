@@ -4,6 +4,16 @@
 
 namespace MathLib
 {
+	Vec4 Vec4::one = Vec4(1.f, 1.f, 1.f, 1.f);
+	Vec4 Vec4::zero = Vec4(0.f, 0.f, 0.f, 0.f);
+	Vec4 Vec4::half = Vec4(.5f, .5f, .5f, .5f);
+	Vec4 Vec4::up = Vec4(0.f, 1.f, 0.f, 0.f);
+	Vec4 Vec4::down = Vec4(0.f, -1.f, 0.f, 0.f);
+	Vec4 Vec4::left = Vec4(-1.f, 0.f, 0.f, 0.f);
+	Vec4 Vec4::right = Vec4(1.f, 0.f, 0.f, 0.f);
+	Vec4 Vec4::forward = Vec4(0.f, 0.f, 1.f, 0.f);
+	Vec4 Vec4::back = Vec4(0.f, 0.f, -1.f, 0.f);
+
 	Vec4::Vec4()
 		: x{ 0.f }, y{ 0.f }, z{ 0.f }, w{ 0.f }
 	{

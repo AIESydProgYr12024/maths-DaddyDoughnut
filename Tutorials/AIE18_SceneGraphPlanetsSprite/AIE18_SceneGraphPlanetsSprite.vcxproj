@@ -161,9 +161,69 @@
   <ItemGroup>
     <ClCompile Include="AIE18Application.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="PlanetSceneObject.cpp" />
+    <ClCompile Include="Resources.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AIE18Application.h" />
+    <ClInclude Include="PlanetSceneObject.h" />
+    <ClInclude Include="Resources.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <CopyFileToFolders Include="assets\planets\planet1.png">
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(OutDir)assets/planets/</DestinationFolders>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="assets\planets\planet10.png">
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(OutDir)assets/planets/</DestinationFolders>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="assets\planets\planet11.png">
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(OutDir)assets/planets/</DestinationFolders>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="assets\planets\planet12.png">
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(OutDir)assets/planets/</DestinationFolders>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="assets\planets\planet13.png">
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(OutDir)assets/planets/</DestinationFolders>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="assets\planets\planet14.png">
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(OutDir)assets/planets/</DestinationFolders>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="assets\planets\planet15.png">
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(OutDir)assets/planets/</DestinationFolders>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="assets\planets\planet16.png">
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(OutDir)assets/planets/</DestinationFolders>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="assets\planets\planet17.png">
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(OutDir)assets/planets/</DestinationFolders>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="assets\planets\planet18.png">
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(OutDir)assets/planets/</DestinationFolders>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="assets\planets\planet19.png">
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(OutDir)assets/planets/</DestinationFolders>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="assets\planets\planet2.png">
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(OutDir)assets/planets/</DestinationFolders>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="assets\planets\planet20.png">
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(OutDir)assets/planets/</DestinationFolders>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="assets\planets\planet3.png">
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(OutDir)assets/planets/</DestinationFolders>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="assets\planets\planet4.png">
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(OutDir)assets/planets/</DestinationFolders>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="assets\planets\planet5.png">
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(OutDir)assets/planets/</DestinationFolders>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="assets\planets\planet6.png">
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(OutDir)assets/planets/</DestinationFolders>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="assets\planets\planet7.png">
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(OutDir)assets/planets/</DestinationFolders>
+    </CopyFileToFolders>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -28,6 +28,15 @@ namespace MathLib
 		};
 
 	public:
+		static Vec3 one;
+		static Vec3 zero;
+		static Vec3 half;
+		static Vec3 up;
+		static Vec3 down;
+		static Vec3 left;
+		static Vec3 right;
+		static Vec3 forward;
+		static Vec3 back;
 
 
 	public:

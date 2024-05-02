@@ -2,7 +2,7 @@
 
 int main()
 {
-	AIE17Application* app = new AIE17Application(720, 480, "Raylib Starter", RAYWHITE);
+	AIE17Application* app = new AIE17Application(720, 480, "Raylib Starter", BLACK);
 
 	app->Run();
 
