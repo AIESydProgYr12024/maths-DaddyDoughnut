@@ -27,7 +27,13 @@ namespace MathLib
 		};
 
 	public:
-
+		static Vec2 one;
+		static Vec2 zero;
+		static Vec2 half;
+		static Vec2 up;
+		static Vec2 down;
+		static Vec2 left;
+		static Vec2 right;
 
 	public:
 		Vec2();

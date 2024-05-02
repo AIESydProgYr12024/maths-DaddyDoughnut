@@ -274,11 +274,9 @@ namespace MathLib
 	{
 		
 		return
-		{
-			Compare(m1, _other.m1) && Compare(m1, _other.m1) && Compare(m1, _other.m1) &&
-			Compare(m1, _other.m1) && Compare(m1, _other.m1) && Compare(m1, _other.m1) &&
-			Compare(m1, _other.m1) && Compare(m1, _other.m1) && Compare(m1, _other.m1)
-		};
+			Compare(m1, _other.m1) && Compare(m2, _other.m2) && Compare(m3, _other.m3) &&
+			Compare(m4, _other.m4) && Compare(m5, _other.m5) && Compare(m6, _other.m6) &&
+			Compare(m7, _other.m7) && Compare(m8, _other.m8) && Compare(m9, _other.m9);
 	}
 
 	bool Mat3::operator!=(const Mat3& _other) const

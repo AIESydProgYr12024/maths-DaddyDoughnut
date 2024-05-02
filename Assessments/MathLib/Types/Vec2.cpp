@@ -2,6 +2,14 @@
 #include "MathLib/MathFunctions.h"
 namespace MathLib
 {
+	Vec2 Vec2::one = Vec2(1.f, 1.f);
+	Vec2 Vec2::zero = Vec2(0.f, 0.f);
+	Vec2 Vec2::half = Vec2(.5f, .5f);
+	Vec2 Vec2::up = Vec2(0.f, 1.f);
+	Vec2 Vec2::down = Vec2(0.f, -1.f);
+	Vec2 Vec2::left = Vec2(-1.f, 0.f);
+	Vec2 Vec2::right = Vec2(1.f, 0.f);
+
 	Vec2::Vec2()
 		: x{ 0.f }, y{ 0.f }
 	{

@@ -2,6 +2,12 @@
 
 #include <raylib/raylib.h>
 
+#include "MathLib/Matrix3Renderer.h"
+
+using MathLib::Vec2;
+using MathLib::Mat3;
+using MathLib::Matrix3Renderer;
+
 class AIE15Application
 {
 public:
@@ -19,6 +25,9 @@ private:
 
 	bool m_running;
 	Color m_clearColor;
+
+	Mat3 m_transform;
+	Matrix3Renderer* m_renderer;
 
 private:
 	void BeginPlay();

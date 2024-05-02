@@ -67,6 +67,18 @@ void AIE14Application::BeginPlay()
 
 void AIE14Application::Tick(float _dt, AIE14Application* _app)
 {
+	if(IsKeyPressed(KEY_UP) && m_currentIndex > 0)
+	{
+		m_currentIndex--;
+		UpdateSelectedMatrix();
+	}
+	if (IsKeyPressed(KEY_DOWN) && m_currentIndex < m_pairs.size() - 1)
+	{
+		m_currentIndex++;
+		UpdateSelectedMatrix();
+	}
+
+	m_matrixC = m_matrixA * m_matrixB;
 }
 
 void AIE14Application::Render(AIE14Application* _app)
@@ -118,4 +130,59 @@ void AIE14Application::UpdateSelectedMatrix()
 
 void AIE14Application::PopulateMatrixPairs()
 {
+	m_pairs.emplace_back(new MatrixMultiplyPair(
+		"Identity * Identity",
+		Mat3(),
+		Mat3()
+	));
+
+	m_pairs.emplace_back(new MatrixMultiplyPair(
+		"Translate * Scale",
+		Mat3::CreateTranslation({ 3, 2 }),
+		Mat3::CreateScale({ 2, 3 })
+	));
+
+	m_pairs.emplace_back(new MatrixMultiplyPair(
+		"Rotation * Translation",
+		Mat3::CreateZRotation(45 * DEG2RAD),
+		Mat3::CreateTranslation({ 3, 2 })
+	));
+
+	m_pairs.emplace_back(new MatrixMultiplyPair(
+		"Translation * Rotation",
+		Mat3::CreateTranslation({ 3, 2 }),
+		Mat3::CreateZRotation(45 * DEG2RAD)
+	));
+
+	Vec2 scale = { 2, 3 };
+
+	m_pairs.emplace_back(new MatrixMultiplyPair(
+		"Transform * Rotation",
+		Mat3::CreateTransform({ 2, 3 }, 0.f, &scale),
+		Mat3::CreateZRotation(45 * DEG2RAD)
+	));
+
+	m_pairs.emplace_back(new MatrixMultiplyPair(
+		"Translate * Translate",
+		Mat3::CreateTranslation({ 3, 2 }),
+		Mat3::CreateTranslation({ 4, 3 })
+	));
+
+	m_pairs.emplace_back(new MatrixMultiplyPair(
+		"Rotate * Scale",
+		Mat3::CreateZRotation(45 * DEG2RAD),
+		Mat3::CreateScale({ 2, 3 })
+	));
+
+	m_pairs.emplace_back(new MatrixMultiplyPair(
+		"Rotate * Rotate",
+		Mat3::CreateZRotation(45 * DEG2RAD),
+		Mat3::CreateZRotation(45 * DEG2RAD)
+	));
+
+	m_pairs.emplace_back(new MatrixMultiplyPair(
+		"Scale * Scale",
+		Mat3::CreateScale({ 2, 3 }),
+		Mat3::CreateScale({ 3, 5 })
+	));
 }
