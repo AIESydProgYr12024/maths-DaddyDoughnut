@@ -2,46 +2,46 @@
 #include "TestToString.h"
 
 #include "Utils.h"
-#include "MathHeaders/Matrix4.h"
+#include "MathLib/Types/Mat4.h"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
-using ::MathClasses::Matrix4;
-using ::MathClasses::Vector3;
+using ::MathLib::Mat4;
+using ::MathLib::Vec3;
 
 namespace MathLibraryTests
 {
-	TEST_CLASS(Matrix4TransformTests)
+	TEST_CLASS(Mat4TransformTests)
 	{
 	public:
 		// make trans from floats
 		TEST_METHOD(MakeTranslationFloats)
 		{
-			Matrix4 actual = Matrix4::MakeTranslation(2.0f, 3.0f, 4.0f);
+			Mat4 actual = Mat4::CreateTranslation(2.0f, 3.0f, 4.0f);
 
 			Assert::AreEqual(
-				Matrix4(1, 0, 0, 0,
-					0, 1, 0, 0,
-					0, 0, 1, 0,
-					2.f, 3.f, 4.f, 1), actual);
+				Mat4(1, 0, 0, 2.f,
+					0, 1, 0, 3.f,
+					0, 0, 1, 4.f,
+					0, 0.f, 0.f, 1), actual);
 		}
 		// make trans from vector
 		TEST_METHOD(MakeTranslationVector)
 		{
-			Matrix4 actual = Matrix4::MakeTranslation(Vector3(2.0f, 3.0f, 4.0f));
+			Mat4 actual = Mat4::CreateTranslation(Vec3(2.0f, 3.0f, 4.0f));
 
 			Assert::AreEqual(
-				Matrix4(1, 0, 0, 0,
-					0, 1, 0, 0,
-					0, 0, 1, 0,
-					2.f, 3.f, 4.f, 1), actual);
+				Mat4(1, 0, 0, 2.f,
+					0, 1, 0, 3.f,
+					0, 0, 1, 4.f,
+					0, 0.f, 0.f, 1), actual);
 		}
 		// make rotX from float
 		TEST_METHOD(MakeRotateXFloat)
 		{
-			Matrix4 actual = Matrix4::MakeRotateX(4.5f);
+			Mat4 actual = Mat4::CreateXRotation(4.5f);
 
 			Assert::AreEqual(
-				Matrix4(1, 0, 0, 0,
+				Mat4(1, 0, 0, 0,
 				0, -0.210796f, 0.97753f, 0,
 				0, -0.97753f, -0.210796f, 0,
 				0, 0, 0, 1), actual);
@@ -49,10 +49,10 @@ namespace MathLibraryTests
 		// make rotY from float
 		TEST_METHOD(MakeRotateYFloat)
 		{
-			Matrix4 actual = Matrix4::MakeRotateY(-2.6f);
+			Mat4 actual = Mat4::CreateYRotation(-2.6f);
 
 			Assert::AreEqual(
-				Matrix4(-0.856889f, 0, -0.515501f, 0,
+				Mat4(-0.856889f, 0, -0.515501f, 0,
 				0, 1, 0, 0,
 				0.515501f, 0, -0.856889f, 0,
 				0, 0, 0, 1), actual);
@@ -60,57 +60,57 @@ namespace MathLibraryTests
 		// make rotZ from float
 		TEST_METHOD(MakeRotateZFloat)
 		{
-			Matrix4 actual = Matrix4::MakeRotateZ(0.72f);
+			Mat4 actual = Mat4::CreateZRotation(0.72f);
 
 			Assert::AreEqual(
-				Matrix4(0.751806f, 0.659385f, 0, 0,
-					-0.659385f, 0.751806f, 0, 0,
+				Mat4(0.751806f, -0.659385f, 0, 0,
+					0.659385f, 0.751806f, 0, 0,
 					0, 0, 1, 0,
 					0, 0, 0, 1), actual);
 		}
 		// make rot from euler (floats)
 		TEST_METHOD(MakeRotateEulerFloat)
 		{
-			Matrix4 actual = Matrix4::MakeEuler(Vector3(1.0f, 2.0f, 3.0f));
+			Mat4 actual = Mat4::CreateEulerRotation(Vec3(1.0f, 2.0f, 3.0f));
 
 			Assert::AreEqual(
-				Matrix4(0.411982f, -0.058727f, 0.909297f, 0.0f,
-					-0.833738f, -0.426918f, 0.350175f, 0.0f,
-					0.367630f, -0.902382f, -0.224845f,
+				Mat4(0.998021f, -0.051720f, 0.035760f, 0.0f,
+					0.052304f, 0.998509f, -0.015602f, 0.0f,
+					-0.034899f, 0.017442f, 0.999239f,
 					0.0f, 0.0f, 0.0f, 0.0f, 1.0f),
 				actual);
 		}
 		// make rot from euler (vector)
 		TEST_METHOD(MakeRotateEulerVector)
 		{
-			Matrix4 actual = Matrix4::MakeEuler(Vector3(1.0f, 2.0f, 3.0f));
+			Mat4 actual = Mat4::CreateEulerRotation(Vec3(1.0f, 2.0f, 3.0f));
 
 			Assert::AreEqual(
-				Matrix4(0.411982f, -0.058727f, 0.909297f, 0.0f,
-					-0.833738f, -0.426918f, 0.350175f, 0.0f,
-					0.367630f, -0.902382f, -0.224845f,
+				Mat4(0.998021f, -0.051720f, 0.035760f, 0.0f,
+					0.052304f, 0.998509f, -0.015602f, 0.0f,
+					-0.034899f, 0.017442f, 0.999239f,
 					0.0f, 0.0f, 0.0f, 0.0f, 1.0f),
 				actual);
 		}
 		// make scale from floats
 		TEST_METHOD(MakeScaleFloat3D)
 		{
-			Matrix4 actual = Matrix4::MakeScale(2.0f, 3.0f, 4.0f);
+			Mat4 actual = Mat4::CreateScale(2.0f, 3.0f, 4.0f);
 
 			Assert::AreEqual(
-				Matrix4(2.0f, 0, 0, 0,
+				Mat4(2.0f, 0, 0, 0,
 				0, 3.0f, 0, 0,
 				0, 0, 4.0f, 0,
 				0, 0, 0, 1), actual);
 
 		}
 		// make scale from vector
-		TEST_METHOD(MakeScaleVector3)
+		TEST_METHOD(MakeScaleVec3)
 		{
-			Matrix4 actual = Matrix4::MakeScale(Vector3(2.0f, 3.0f, 4.0f));
+			Mat4 actual = Mat4::CreateScale(Vec3(2.0f, 3.0f, 4.0f));
 
 			Assert::AreEqual(
-				Matrix4(2.0f, 0, 0, 0,
+				Mat4(2.0f, 0, 0, 0,
 					0, 3.0f, 0, 0,
 					0, 0, 4.0f, 0,
 					0, 0, 0, 1), actual);

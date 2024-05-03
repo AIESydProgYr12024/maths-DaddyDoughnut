@@ -18,7 +18,7 @@ namespace MathLibraryTests
 		TEST_METHOD(ColourDefaultConstructor)
 		{
 			Colour actual;
-			Assert::AreEqual( Colour(0, 0, 0, 255).value, UnitLib::BuildColour(0,0,0,255) ); 
+			Assert::AreEqual( Colour(0, 0, 0, 255).value, actual.value ); 
 		}
 
 		// parameterized constructor
@@ -26,7 +26,7 @@ namespace MathLibraryTests
 		{
 			Colour actual{ 32, 64, 10, 255 };
 
-			Assert::AreEqual( UnitLib::BuildColour(32, 64, 10, 255), actual.value);
+			Assert::AreEqual( Colour(32, 64, 10, 255).value, actual.value);
 		}
 
 		// Check equality method
@@ -41,7 +41,7 @@ namespace MathLibraryTests
 		{
 			Colour actual(32, 64, 10, 255);
 			actual.SetRed(128);
-			Assert::AreEqual( UnitLib::BuildColour(128, 64, 10, 255), actual.value);
+			Assert::AreEqual( Colour(128, 64, 10, 255).value, actual.value);
 		}
 		
 		// setting g
@@ -49,7 +49,7 @@ namespace MathLibraryTests
 		{
 			Colour actual(32, 64, 10, 255);
 			actual.SetGreen(128);
-			Assert::AreEqual(UnitLib::BuildColour(32, 128, 10, 255), actual.value);
+			Assert::AreEqual(Colour(32, 128, 10, 255).value, actual.value);
 		}
 
 		// setting b
@@ -57,7 +57,7 @@ namespace MathLibraryTests
 		{
 			Colour actual(32, 64, 10, 255);
 			actual.SetBlue(128);
-			Assert::AreEqual(UnitLib::BuildColour(32, 64, 128, 255), actual.value);
+			Assert::AreEqual(Colour(32, 64, 128, 255).value, actual.value);
 		}
 
 		// setting a
@@ -65,35 +65,35 @@ namespace MathLibraryTests
 		{
 			Colour actual(32, 64, 10, 255);
 			actual.SetAlpha(128);
-			Assert::AreEqual(UnitLib::BuildColour(32, 64, 10, 128), actual.value);
+			Assert::AreEqual(Colour(32, 64, 10, 128).value, actual.value);
 		}
 		// Get Red
 		TEST_METHOD(GetRed)
 		{
-			Colour actual(32, 64, 10, 255);
-			auto red = actual.Red();
-			Assert::AreEqual(red, (Byte)32);
+			const Colour actual(32, 64, 10, 255);
+			const uint8_t red = actual.Red();
+			Assert::AreEqual(red, static_cast<uint8_t>(32));
 		}
 		// Get Green
 		TEST_METHOD(GetGreen)
 		{
-			Colour actual(32, 64, 10, 255);
-			auto green = actual.Green();
-			Assert::AreEqual(green, (Byte)64);
+			const Colour actual(32, 64, 10, 255);
+			const uint8_t green = actual.Green();
+			Assert::AreEqual(green, static_cast<uint8_t>(64));
 		}
 		// Get Blue
 		TEST_METHOD(GetBlue)
 		{
-			Colour actual(32, 64, 10, 255);
-			auto blue = actual.Blue();
-			Assert::AreEqual(blue, (Byte)10);
+			const Colour actual(32, 64, 10, 255);
+			const uint8_t blue = actual.Blue();
+			Assert::AreEqual(blue, static_cast<uint8_t>(10));
 		}
 		// Get Alpha
 		TEST_METHOD(GetAlpha)
 		{
-			Colour actual(32, 64, 0, 255);
-			auto alpha = actual.Alpha();
-			Assert::AreEqual(alpha, (Byte)255);
+			const Colour actual(32, 64, 0, 255);
+			const uint8_t alpha = actual.Alpha();
+			Assert::AreEqual(alpha, static_cast<uint8_t>(255));
 		}
 	};
 }

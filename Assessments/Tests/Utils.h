@@ -3,8 +3,6 @@
 #define _USE_MATH_DEFINES
 #include <cmath>
 
-#include "MathHeaders/Colour.h"
-
 namespace MathClasses
 {
     // Maximum tolerance for comparing floats

@@ -27,6 +27,70 @@ namespace MathLib
 	{
 	}
 
+	Mat4::Mat4(float _matrix[MAT_4_SIZE])
+	{
+	}
+
+	Mat4 Mat4::CreateTranslation(const Vec3& _trans)
+	{
+		return {};
+	}
+
+	Mat4 Mat4::CreateTranslation(float _x, float _y, float _z)
+	{
+		return {};
+	}
+
+	Mat4 Mat4::CreateScale(const Vec3& _scale)
+	{
+		return {};
+	}
+
+	Mat4 Mat4::CreateScale(float _x, float _y, float _z)
+	{
+		return {};
+	}
+
+	Mat4 Mat4::CreateXRotation(float _rot)
+	{
+		return {};
+	}
+
+	Mat4 Mat4::CreateYRotation(float _rot)
+	{
+		return {};
+	}
+
+	Mat4 Mat4::CreateZRotation(float _rot)
+	{
+		return {};
+	}
+
+	Mat4 Mat4::CreateEulerRotation(float _x, float _y, float _z)
+	{
+		return {};
+	}
+
+	Mat4 Mat4::CreateEulerRotation(const Vec3& _euler)
+	{
+		return {};
+	}
+
+	Mat4 Mat4::Identity()
+	{
+		return {};
+	}
+
+	Vec4 Mat4::Transposed()
+	{
+		return {};
+	}
+
+	string Mat4::ToString() const
+	{
+		return "";
+	}
+
 	Mat4::Mat4(const Mat4& _other) :
 		m1{ _other.m1 }, m5{ _other.m5 }, m9{ _other.m9 }, m13{ _other.m13 },
 		m2{ _other.m2 }, m6{ _other.m6 }, m10{ _other.m10 }, m14{ _other.m14 },

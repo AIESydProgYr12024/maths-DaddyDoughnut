@@ -64,6 +64,7 @@ namespace MathLib
 
 	public:
 		float Dot(const Vec4& _rhs) const;
+		Vec4 Cross(const Vec4& _rhs);
 
 		float Magnitude() const;
 		float MagnitudeSqr() const;

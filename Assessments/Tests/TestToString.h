@@ -5,23 +5,23 @@
 
 #include "CppUnitTestAssert.h"
 
-#include "MathHeaders/Vector3.h"
-#include "MathHeaders/Vector4.h"
-#include "MathHeaders/Matrix3.h"
-#include "MathHeaders/Matrix4.h"
-#include "MathHeaders/Colour.h"
+#include "MathLib/Types/Vec3.h"
+#include "MathLib/Types/Vec4.h"
+#include "MathLib/Types/Mat3.h"
+#include "MathLib/Types/Mat4.h"
+#include "MathLib/Types/Colour.h"
 
 namespace Microsoft {
 	namespace VisualStudio {
 		namespace CppUnitTestFramework
 		{
-			using MathClasses::Vector3;
-			using MathClasses::Vector4;
-			using MathClasses::Matrix3;
-			using MathClasses::Matrix4;
-			using MathClasses::Colour;
+			using MathLib::Vec3;
+			using MathLib::Vec4;
+			using MathLib::Mat3;
+			using MathLib::Mat4;
+			using MathLib::Colour;
 
-			template<> inline std::wstring ToString<Vector3>(const Vector3& t)
+			template<> inline std::wstring ToString<Vec3>(const Vec3& t)
 			{
 				auto str = t.ToString();
 
@@ -43,7 +43,7 @@ namespace Microsoft {
 				return ws;
 			}
 
-			template<> inline std::wstring ToString<Vector4>(const Vector4& t)
+			template<> inline std::wstring ToString<Vec4>(const Vec4& t)
 			{
 				auto str = t.ToString();
 
@@ -65,7 +65,7 @@ namespace Microsoft {
 				return ws;
 			}
 
-			template<> inline std::wstring ToString<Matrix3>(const Matrix3& t)
+			template<> inline std::wstring ToString<Mat3>(const Mat3& t)
 			{
 				auto str = t.ToString();
 
@@ -87,7 +87,7 @@ namespace Microsoft {
 				return ws;
 			}
 
-			template<> inline std::wstring ToString<Matrix4>(const Matrix4& t)
+			template<> inline std::wstring ToString<Mat4>(const Mat4& t)
 			{
 				auto str = t.ToString();
 
@@ -111,10 +111,10 @@ namespace Microsoft {
 
 			template<> inline std::wstring ToString<Colour>(const Colour& t)
 			{
-				auto str =	std::to_string(t.GetRed()) +
-							std::to_string(t.GetGreen()) +
-							std::to_string(t.GetBlue()) +
-							std::to_string(t.GetAlpha());
+				auto str =	std::to_string(t.Red()) +
+							std::to_string(t.Green()) +
+							std::to_string(t.Blue()) +
+							std::to_string(t.Alpha());
 
 				// mbstowcs_s will expect space to write L'\0' if it isn't already included
 				// in the src buffer

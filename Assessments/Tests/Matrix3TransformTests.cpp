@@ -2,47 +2,48 @@
 #include "TestToString.h"
 
 #include "Utils.h"
-#include "MathHeaders/Matrix3.h"
+#include "MathLib/Types/Mat3.h"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
-using ::MathClasses::Matrix3;
-using ::MathClasses::Vector3;
+using ::MathLib::Mat3;
+using ::MathLib::Vec3;
 
 namespace MathLibraryTests
 {
-	TEST_CLASS(Matrix3TransformTests)
+	TEST_CLASS(Mat3TransformTests)
 	{
 	public:
 		// make trans from floats
 		TEST_METHOD(MakeTranslationFloats)
 		{
-			Matrix3 actual = Matrix3::MakeTranslation(1.2f, 3.4f, 1.0f);
+			Mat3 actual = Mat3::CreateTranslation(1.2f, 3.4f, 1.0f);
 
 			Assert::AreEqual(
-				Matrix3(
-					1.0f, 0.0f, 0.0f,
-					0.0f, 1.0f, 0.0f,
-					1.2f, 3.4f, 1.0f),
+				Mat3(
+					1.0f, 0.0f, 1.2f,
+					0.0f, 1.0f, 3.4f,
+					0.f, 0.f, 1.0f),
 				actual);
 		}
 		// make trans from vector
 		TEST_METHOD(MakeTranslationVector)
 		{
-			Matrix3 actual = Matrix3::MakeTranslation(Vector3(1.2f, 3.4f, 1.0f));
+			Mat3 actual = Mat3::CreateTranslation(Vec3{ 1.2f, 3.4f, 1.0f });
 
 			Assert::AreEqual(
-				Matrix3(1.0f, 0.0f, 0.0f,
-					0.0f, 1.0f, 0.0f,
-					1.2f, 3.4f, 1.0f),
+				Mat3(
+					1.0f, 0.0f, 1.2f,
+					0.0f, 1.0f, 3.4f,
+					0.f, 0.f, 1.0f),
 				actual);
 		}
 		// make rotX from float
 		TEST_METHOD(MakeRotateXFloat)
 		{
-			Matrix3 actual = Matrix3::MakeRotateX(3.98f);
+			Mat3 actual = Mat3::CreateXRotation(3.98f);
 
 			Assert::AreEqual(
-				Matrix3(
+				Mat3(
 					1, 0, 0,
 					0, -0.668648f, 0.743579f,
 					0, -0.743579f, -0.668648f),
@@ -51,10 +52,10 @@ namespace MathLibraryTests
 		// make rotY from float
 		TEST_METHOD(MakeRotateYFloat)
 		{
-			Matrix3 actual = Matrix3::MakeRotateY(1.76f);
+			Mat3 actual = Mat3::CreateYRotation(1.76f);
 
 			Assert::AreEqual(
-				Matrix3(
+				Mat3(
 					-0.188077f, 0, 0.982154f,
 					0, 1, 0,
 					-0.982154f, 0, -0.188077f),
@@ -63,67 +64,64 @@ namespace MathLibraryTests
 		// make rotZ from float
 		TEST_METHOD(MakeRotateZFloat)
 		{
-			Matrix3 actual = Matrix3::MakeRotateZ(9.62f);
+			Mat3 actual = Mat3::CreateZRotation(9.62f);
 
 			Assert::AreEqual(
-				Matrix3(
-					-0.981005f, -0.193984f, 0,
-					0.193984f, -0.981005f, 0,
-					0, 0, 1),
+				Mat3(-0.981005f, 0.193984f, 0.f, 
+					-0.193984f, -0.981005f, 0.f, 
+					0.f, 0.f, 1.f),
 				actual);
 		}
 		// make rot from euler (floats)
 		TEST_METHOD(MakeRotateEulerFloat)
 		{
-			Matrix3 actual = Matrix3::MakeEuler(1.0f, 2.0f, 3.0f);
+			Mat3 actual = Mat3::CreateEulerRotation(1.0f, 2.0f, 3.0f);
 
 			Assert::AreEqual(
-				Matrix3(
-					0.411982f, -0.058727f, 0.909297f,
-					-0.833738f, -0.426918f, 0.350175f,
-					0.367630f, -0.902382f, -0.224845f),
+				Mat3(0.998021f, -0.051720f, 0.035760f,
+					0.052304f, 0.998509f, -0.015602f,
+					-0.034899f, 0.017442f, 0.999239f),
 				actual);
 		}
 		// make rot from euler (vector)
 		TEST_METHOD(MakeRotateEulerVector)
 		{
-			Matrix3 actual = Matrix3::MakeEuler(Vector3(1.0f, 2.0f, 3.0f));
+			Mat3 actual = Mat3::CreateEulerRotation({ 1.0f, 2.0f, 3.0f });
 
 			Assert::AreEqual(
-				Matrix3(
-					0.411982f, -0.058727f, 0.909297f,
-					-0.833738f, -0.426918f, 0.350175f,
-					0.367630f, -0.902382f, -0.224845f),
+				Mat3(0.998021f, -0.051720f, 0.035760f,
+					0.052304f, 0.998509f, -0.015602f,
+					-0.034899f, 0.017442f, 0.999239f),
 				actual);
 
 		}
 		// make scale from floats
 		TEST_METHOD(MakeScaleFloat2D)
 		{
-			Matrix3 actual = Matrix3::MakeScale(2.0f, 3.0f);
+			Mat3 actual = Mat3::CreateScale(Vec3{ 2.0f, 3.0f });
 
 			Assert::AreEqual(
-				Matrix3(2.0f, 0.0f, 0.0f,
+				Mat3(2.0f, 0.0f, 0.0f,
 						0.0f, 3.0f, 0.0f,
 						0.0f, 0.0f, 1.0f), actual);
 		}
 		// make scale from floats
 		TEST_METHOD(MakeScaleFloat3D)
 		{
-			Matrix3 actual = Matrix3::MakeScale(2.0f, 3.0f, 4.0f);
+			Mat3 actual = Mat3::CreateScale(Vec3{ 2.0f, 3.0f, 4.0f });
 
 			Assert::AreEqual(
-				Matrix3(2.0f, 0.0f, 0.0f,
+				Mat3(2.0f, 0.0f, 0.0f,
 					0.0f, 3.0f, 0.0f,
 					0.0f, 0.0f, 4.0f), actual);
 		}
 		// make scale from vector
-		TEST_METHOD(MakeScaleVector3)
+		TEST_METHOD(MakeScaleVec3)
 		{
-			Matrix3 actual = Matrix3::MakeScale(Vector3(2.0f, 3.0f, 4.0f));
+			Mat3 actual = Mat3::CreateScale(Vec3{ 2.0f, 3.0f, 4.0f });
 
 			Assert::AreEqual(
-				Matrix3(2.0f, 0.0f, 0.0f,
+				Mat3(2.0f, 0.0f, 0.0f,
 					0.0f, 3.0f, 0.0f,
 					0.0f, 0.0f, 4.0f), actual);
 		}

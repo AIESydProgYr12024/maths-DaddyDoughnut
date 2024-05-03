@@ -3,6 +3,10 @@
 #include "MathLib/Types/Mat3.h"
 
 #include "MathLib/MathFunctions.h"
+#include <sstream>
+
+using std::stringstream;
+
 
 namespace MathLib
 {
@@ -27,6 +31,102 @@ namespace MathLib
 		m2{ _m2 }, m5{ _m5 }, m8{ _m8 },
 		m3{ _m3 }, m6{ _m6 }, m9{ _m9 }
 	{
+	}
+
+	Mat3::Mat3(float _matrix[9])
+	{
+		for (size_t i = 0; i < MAT_3_SIZE; ++i)
+			data[i] = _matrix[i];
+
+	}
+
+	Mat3 Mat3::CreateTranslation(const Vec3& _trans)
+	{
+		return
+		{
+			1.f, 0.f, _trans.x,
+			0.f, 1.f, _trans.y,
+			0.f, 0.f, _trans.z
+		};
+	}
+
+	Mat3 Mat3::CreateTranslation(float _x, float _y)
+	{
+		return CreateTranslation(Vec2{ _x, _y });
+	}
+
+	Mat3 Mat3::CreateTranslation(float _x, float _y, float _z)
+	{
+		return CreateTranslation(Vec2{ _x, _y, _z });
+	}
+
+	Mat3 Mat3::CreateScale(const Vec3& _scale)
+	{
+		return
+		{
+			_scale.x, 0.f, 0.f,
+			0.f, _scale.y, 0.f,
+			0.f, 0.f, _scale.z
+		};
+	}
+
+	Mat3 Mat3::CreateScale(float _x, float _y)
+	{
+		return CreateScale(Vec2{ _x, _y });
+	}
+
+	Mat3 Mat3::CreateScale(float _x, float _y, float _z)
+	{
+		return CreateScale(Vec2{ _x, _y, _z });
+	}
+
+	Mat3 Mat3::CreateEulerRotation(float _x, float _y, float _z)
+	{
+		return CreateEulerRotation(Vec3{ _x, _y, _z });
+	}
+
+	Mat3 Mat3::CreateEulerRotation(const Vec3& _euler)
+	{
+		const Mat3 x = CreateXRotation(_euler.x * DEG2RAD);
+		const Mat3 y = CreateYRotation(_euler.y * DEG2RAD);
+		const Mat3 z = CreateZRotation(_euler.z * DEG2RAD);
+
+		return x * y * z;
+	}
+
+	Mat3 Mat3::Identity()
+	{
+		return { 1.f };
+	}
+
+	Mat3 Mat3::Transposed()
+	{
+		return
+		{
+			m1, m2, m3,
+			m4, m5, m6,
+			m7, m8, m9
+		};
+	}
+
+	string Mat3::ToString() const 
+	{
+		stringstream stream;
+
+
+		stream << "(";
+
+		for(size_t i = 0; i < MAT_3_SIZE; ++i)
+		{
+			stream << data[i];
+
+			if (i + 1 < MAT_3_SIZE)
+				stream << ", ";
+		}
+
+		stream << ")";
+
+		return stream.str();
 	}
 
 

@@ -129,7 +129,7 @@ namespace MathLib
 
 	float Vec3::Magnitude() const
 	{
-		return sqrt((x * x) + (y * y) + (z * z));
+		return sqrtf((x * x) + (y * y) + (z * z));
 	}
 
 	float Vec3::MagnitudeSqr() const
@@ -257,5 +257,10 @@ namespace MathLib
 		_other.z = 0.f;
 
 		return *this;
+	}
+
+	Vec3 operator*(float _lhs, const Vec3& _rhs)
+	{
+		return _rhs * _lhs;
 	}
 }

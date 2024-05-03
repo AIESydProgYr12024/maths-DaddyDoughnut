@@ -107,6 +107,11 @@ namespace MathLib
 		return (x * _rhs.x) + (y * _rhs.y) + (z * _rhs.z) + (w * _rhs.w);
 	}
 
+	Vec4 Vec4::Cross(const Vec4& _rhs)
+	{
+		return {};
+	}
+
 	float Vec4::Magnitude() const
 	{
 		return sqrt((x * x) + (y * y) + (z * z) + (w * w));
