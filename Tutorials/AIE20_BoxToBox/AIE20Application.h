@@ -2,6 +2,12 @@
 
 #include <raylib/raylib.h>
 
+#include "MathLib/Geometry/Rect.h"
+#include "MathLib/Types/Vec2.h"
+
+using MathLib::Vec2;
+using MathLib::Rect;
+
 class AIE20Application
 {
 public:
@@ -20,6 +26,11 @@ private:
 	bool m_running;
 	Color m_clearColor;
 
+	Rect* m_box1;
+	Rect* m_box2;
+
+	bool m_resolveCollision;
+
 private:
 	void BeginPlay();
 
@@ -27,5 +38,9 @@ private:
 	void Render(AIE20Application* _app);
 
 	void EndPlay();
+
+	void DrawBox(Rect* _box, Color _color);
+	void DrawBoxClosestPoint(const Rect* _box, const Vec2& _point);
+	void DrawBoxIntersection(const Rect* _a, const Rect* _b);
 
 };

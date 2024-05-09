@@ -6,7 +6,11 @@
 namespace MathLib
 {
 
-	SceneObject::SceneObject() = default;
+	SceneObject::SceneObject()
+		: m_transform{ Mat3(1.f) }, m_parent{ nullptr }
+	{
+		
+	}
 
 	SceneObject::~SceneObject()
 	{

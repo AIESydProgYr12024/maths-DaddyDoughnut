@@ -2,6 +2,12 @@
 
 #include <raylib/raylib.h>
 
+#include "MathLib/Geometry/Circle.h"
+#include "MathLib/Types/Vec2.h"
+
+using MathLib::Vec2;
+using MathLib::Circle;
+
 class AIE19Application
 {
 public:
@@ -20,6 +26,11 @@ private:
 	bool m_running;
 	Color m_clearColor;
 
+	Circle* m_circle1;
+	Circle* m_circle2;
+
+	bool m_resolveCollision;
+
 private:
 	void BeginPlay();
 
@@ -27,5 +38,10 @@ private:
 	void Render(AIE19Application* _app);
 
 	void EndPlay();
+
+	void DrawCircle(const Circle* _circle, Color _color);
+	void DrawClosestPoint(const Circle* _circle, const Vec2& _point);
+
+	void DrawCircleIntersection(const Circle* _a, const Circle* _b);
 
 };
