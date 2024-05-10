@@ -98,7 +98,7 @@ namespace MathLibraryTests
 		// make scale from floats
 		TEST_METHOD(MakeScaleFloat2D)
 		{
-			Mat3 actual = Mat3::CreateScale(Vec3{ 2.0f, 3.0f });
+			Mat3 actual = Mat3::CreateScale(MathLib::Vec2{ 2.0f, 3.0f });
 
 			Assert::AreEqual(
 				Mat3(2.0f, 0.0f, 0.0f,

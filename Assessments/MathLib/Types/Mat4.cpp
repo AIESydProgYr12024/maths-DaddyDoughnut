@@ -3,10 +3,10 @@
 namespace MathLib
 {
 	Mat4::Mat4() :
-		m1{ 1.f }, m5{ 0.f }, m9{ 0.f }, m13{ 0.f },
-		m2{ 0.f }, m6{ 1.f }, m10{ 0.f }, m14{ 0.f },
-		m3{ 0.f }, m7{ 0.f }, m11{ 1.f }, m15{ 0.f },
-		m4{ 0.f }, m8{ 0.f }, m12{ 0.f }, m16{ 1.f }
+		m1{ 0.f }, m5{ 0.f }, m9{ 0.f }, m13{ 0.f },
+		m2{ 0.f }, m6{ 0.f }, m10{ 0.f }, m14{ 0.f },
+		m3{ 0.f }, m7{ 0.f }, m11{ 0.f }, m15{ 0.f },
+		m4{ 0.f }, m8{ 0.f }, m12{ 0.f }, m16{ 0.f }
 	{
 	}
 
@@ -29,6 +29,8 @@ namespace MathLib
 
 	Mat4::Mat4(float _matrix[MAT_4_SIZE])
 	{
+		for (size_t i = 0; i < MAT_4_SIZE; ++i)
+			data[i] = _matrix[i];
 	}
 
 	Mat4 Mat4::CreateTranslation(const Vec3& _trans)
@@ -78,7 +80,7 @@ namespace MathLib
 
 	Mat4 Mat4::Identity()
 	{
-		return {};
+		return { 1.f };
 	}
 
 	Vec4 Mat4::Transposed()
@@ -168,12 +170,37 @@ namespace MathLib
 
 	Mat4 Mat4::operator*(const Mat4& _rhs) const
 	{
-		return {};
+		return
+		{
+			m1 * _rhs.m1 + m2 * _rhs.m5 + m3 * _rhs.m9 + m4 * _rhs.m13,
+			m5 * _rhs.m1 + m6 * _rhs.m5 + m7 * _rhs.m9 + m8 * _rhs.m13,
+			m9 * _rhs.m1 + m10 * _rhs.m5 + m11 * _rhs.m9 + m12 * _rhs.m13,
+			m13 * _rhs.m1 + m14 * _rhs.m5 + m15 * _rhs.m9 + m16 * _rhs.m13,
+			m1 * _rhs.m2 + m2 * _rhs.m6 + m3 * _rhs.m10 + m4 * _rhs.m14,
+			m5 * _rhs.m2 + m6 * _rhs.m6 + m7 * _rhs.m10 + m8 * _rhs.m14,
+			m9 * _rhs.m2 + m10 * _rhs.m6 + m11 * _rhs.m10 + m12 * _rhs.m14,
+			m13 * _rhs.m2 + m14 * _rhs.m6 + m15 * _rhs.m10 + m16 * _rhs.m14,
+			m1 * _rhs.m3 + m2 * _rhs.m7 + m3 * _rhs.m11 + m4 * _rhs.m15,
+			m5 * _rhs.m3 + m6 * _rhs.m7 + m7 * _rhs.m11 + m8 * _rhs.m15,
+			m9 * _rhs.m3 + m10 * _rhs.m7 + m11 * _rhs.m11 + m12 * _rhs.m15,
+			m13 * _rhs.m3 + m14 * _rhs.m7 + m15 * _rhs.m11 + m16 * _rhs.m15,
+			m1 * _rhs.m4 + m2 * _rhs.m8 + m3 * _rhs.m12 + m4 * _rhs.m16,
+			m5 * _rhs.m4 + m6 * _rhs.m8 + m7 * _rhs.m12 + m8 * _rhs.m16,
+			m9 * _rhs.m4 + m10 * _rhs.m8 + m11 * _rhs.m12 + m12 * _rhs.m16,
+			m13 * _rhs.m4 + m14 * _rhs.m8 + m15 * _rhs.m12 + m16 * _rhs.m16
+			
+		};
 	}
 
 	Vec4 Mat4::operator*(const Vec4& _rhs) const
 	{
-		return {};
+		return
+		{
+			m1* _rhs.x + m2 * _rhs.y + m3 * _rhs.z + m4 * _rhs.w,
+			m5* _rhs.x + m6 * _rhs.y + m7 * _rhs.z + m8 * _rhs.w,
+			m9* _rhs.x + m10 * _rhs.y + m11 * _rhs.z + m12 * _rhs.w,
+			m13* _rhs.x + m14 * _rhs.y + m15 * _rhs.z + m16 * _rhs.w,
+		};
 	}
 
 	bool Mat4::operator==(const Mat4& _other) const

@@ -103,7 +103,7 @@ namespace MathLib
 	{
 		return {
 			(_lhs.y * _rhs.z) - (_lhs.z * _rhs.y),
-			(_lhs.x * _rhs.z) - (_lhs.z * _rhs.x),
+			(_lhs.z * _rhs.x) - (_lhs.x * _rhs.z),
 			(_lhs.y * _rhs.x) - (_lhs.x * _rhs.y)
 		};
 	}

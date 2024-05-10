@@ -13,9 +13,9 @@ namespace MathLib
 	
 	
 	Mat3::Mat3() :
-		m1{ 1.f }, m4{ 0.f }, m7{ 0.f },
-		m2{ 0.f }, m5{ 1.f }, m8{ 0.f },
-		m3{ 0.f }, m6{ 0.f }, m9{ 1.f }
+		m1{ 0.f }, m4{ 0.f }, m7{ 0.f },
+		m2{ 0.f }, m5{ 0.f }, m8{ 0.f },
+		m3{ 0.f }, m6{ 0.f }, m9{ 0.f }
 	{
 	}
 
@@ -128,7 +128,6 @@ namespace MathLib
 
 		return stream.str();
 	}
-
 
 	Mat3::Mat3(const Mat3& _other) :
 		m1{ _other.m1 }, m4{ _other.m4 }, m7{ _other.m7 },
