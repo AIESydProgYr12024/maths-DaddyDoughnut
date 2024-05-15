@@ -122,8 +122,8 @@ namespace MathLib
 	{
 		return {
 			(y * _rhs.z) - (z * _rhs.y),
-			(x * _rhs.z) - (z * _rhs.x),
-			(y * _rhs.x) - (x * _rhs.y)
+			(z * _rhs.x) - (x * _rhs.z),
+			(x * _rhs.y) - (y * _rhs.x)
 		};
 	}
 

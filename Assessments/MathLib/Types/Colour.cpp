@@ -3,63 +3,76 @@
 namespace MathLib
 {
 	Colour::Colour()
+		: value{ 0x000000FF }
 	{
 	}
 
 	Colour::Colour(uint32_t _value)
+		: value{ _value }
 	{
 	}
 
 	Colour::Colour(uint8_t _r, uint8_t _g, uint8_t _b, uint8_t _a)
+		: value{ ((uint32_t)_r << 24) | ((uint32_t)_g << 16) | ((uint32_t)_b << 8) | _a }
 	{
 	}
 
 	Colour::Colour(const Colour& _other)
+		: value{ _other.value }
 	{
 	}
 
 	Colour::Colour(Colour&& _other) noexcept
+		: value{ _other.value }
 	{
+		_other.value = 0;
 	}
 
-	Colour::~Colour()
-	{
-	}
+	Colour::~Colour() = default;
 
 	uint8_t Colour::Red() const
 	{
-		return 0;
+		return static_cast<uint8_t>(value);
 	}
 
 	uint8_t Colour::Green() const
 	{
-		return 0;
+		return static_cast<uint8_t>((value >> 8) & 0xFF);
 	}
 
 	uint8_t Colour::Blue() const
 	{
-		return 0;
+		return static_cast<uint8_t>((value >> 16) & 0xFF);
 	}
 
 	uint8_t Colour::Alpha() const
 	{
-		return 0;
+		return static_cast<uint8_t>((value >> 24) & 0xFF);
 	}
 
 	void Colour::SetRed(uint8_t _r)
 	{
+		value = (value & 0x00FFFFFF) | _r;
 	}
 
 	void Colour::SetGreen(uint8_t _g)
 	{
+		value = (value & 0xFF00FFFF) | _g;
 	}
 
 	void Colour::SetBlue(uint8_t _b)
 	{
+		value = (value & 0xFFFF00FF) | _b;
 	}
 
 	void Colour::SetAlpha(uint8_t _a)
 	{
+		value = (value & 0xFFFFFF00) | _a;
+	}
+
+	uint32_t Colour::BitShift(uint8_t _value)
+	{
+		return _value >> 8;
 	}
 
 	Colour::operator Color() const

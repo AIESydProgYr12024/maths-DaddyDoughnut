@@ -255,6 +255,6 @@ namespace MathLib
 
 	Vec4 operator*(float _lhs, const Vec4& _rhs)
 	{
-		return {_lhs * _rhs.x, _lhs * _rhs.y, _lhs * _rhs.z, _lhs * _rhs.w };
+		return { _lhs * _rhs.x, _lhs * _rhs.y, _lhs * _rhs.z, _lhs * _rhs.w };
 	}
 }
