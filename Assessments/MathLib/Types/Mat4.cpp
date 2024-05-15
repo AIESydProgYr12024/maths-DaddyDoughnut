@@ -55,7 +55,16 @@ namespace MathLib
 
 	Mat4 Mat4::CreateXRotation(float _rot)
 	{
-		return {};
+		const float cos = cosf(_rot);
+		const float sin = sinf(_rot);
+
+		return
+		{
+			1.f, 0.f, 0.f, 0.f,
+			0.f, cos, -sin, 0.f,
+			0.f, sin, cos, 0.f,
+			0.f, 0.f, 0.f, 1.f
+		};
 	}
 
 	Mat4 Mat4::CreateYRotation(float _rot)
@@ -75,7 +84,11 @@ namespace MathLib
 
 	Mat4 Mat4::CreateEulerRotation(const Vec3& _euler)
 	{
-		return {};
+		const Mat4 x = CreateXRotation(_euler.x * DEG2RAD);
+		const Mat4 y = CreateYRotation(_euler.y * DEG2RAD);
+		const Mat4 z = CreateZRotation(_euler.z * DEG2RAD);
+
+		return x * y * z;
 	}
 
 	Mat4 Mat4::Identity()

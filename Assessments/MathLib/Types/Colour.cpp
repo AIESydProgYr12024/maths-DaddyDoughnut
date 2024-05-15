@@ -13,8 +13,11 @@ namespace MathLib
 	}
 
 	Colour::Colour(uint8_t _r, uint8_t _g, uint8_t _b, uint8_t _a)
-		: value{ ((uint32_t)_r << 24) | ((uint32_t)_g << 16) | ((uint32_t)_b << 8) | _a }
 	{
+		SetRed(_r);
+		SetGreen(_g);
+		SetBlue(_b);
+		SetAlpha(_a);
 	}
 
 	Colour::Colour(const Colour& _other)
@@ -37,17 +40,17 @@ namespace MathLib
 
 	uint8_t Colour::Green() const
 	{
-		return static_cast<uint8_t>((value >> 8) & 0xFF);
+		return static_cast<uint8_t>(value);
 	}
 
 	uint8_t Colour::Blue() const
 	{
-		return static_cast<uint8_t>((value >> 16) & 0xFF);
+		return static_cast<uint8_t>(value);
 	}
 
 	uint8_t Colour::Alpha() const
 	{
-		return static_cast<uint8_t>((value >> 24) & 0xFF);
+		return static_cast<uint8_t>(value);
 	}
 
 	void Colour::SetRed(uint8_t _r)
