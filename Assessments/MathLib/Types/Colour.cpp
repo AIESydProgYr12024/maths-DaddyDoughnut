@@ -1,5 +1,7 @@
 #include "MathLib/Types/Colour.h"
 
+#include "MathLib/MathFunctions.h"
+
 namespace MathLib
 {
 	Colour::Colour()
@@ -35,17 +37,17 @@ namespace MathLib
 
 	uint8_t Colour::Red() const
 	{
-		return static_cast<uint8_t>(value);
+		return static_cast<uint8_t>(value >> 16);
 	}
 
 	uint8_t Colour::Green() const
 	{
-		return static_cast<uint8_t>(value);
+		return static_cast<uint8_t>(value >> 16);
 	}
 
 	uint8_t Colour::Blue() const
 	{
-		return static_cast<uint8_t>(value);
+		return static_cast<uint8_t>(value >> 16);
 	}
 
 	uint8_t Colour::Alpha() const
@@ -80,26 +82,37 @@ namespace MathLib
 
 	Colour::operator Color() const
 	{
-		return {};
+		return { Red(), Green(), Blue(), Alpha() };
 	}
 
 	bool Colour::operator==(const Colour& _rhs) const
 	{
-		return false;
+		return Compare(Red(), _rhs.Red()) && Compare(Green(), _rhs.Green()) && Compare(Blue(), _rhs.Blue()) && Compare(Alpha(), _rhs.Alpha());
 	}
 
 	bool Colour::operator!=(const Colour& _rhs) const
 	{
-		return false;
+		return !(*this == _rhs);
 	}
 
 	Colour& Colour::operator=(const Colour& _other)
 	{
+		if (*this == _other)
+			return *this;
+
+		value = _other.value;
+
 		return *this;
 	}
 
 	Colour& Colour::operator=(Colour&& _other) noexcept
 	{
+		if (*this == _other)
+			return *this;
+
+		value = _other.value;
+		_other.value = 0.f;
+
 		return *this;
 	}
 }

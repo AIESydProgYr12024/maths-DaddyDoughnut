@@ -1,5 +1,7 @@
 #include "MathLib/Types/Mat4.h"
 
+#include "MathLib/MathFunctions.h"
+
 namespace MathLib
 {
 	Mat4::Mat4() :
@@ -35,22 +37,34 @@ namespace MathLib
 
 	Mat4 Mat4::CreateTranslation(const Vec3& _trans)
 	{
-		return {};
+		return
+		{
+			1.f, 0.f, 0.f, _trans.x,
+			0.f, 1.f, 0.f, _trans.y,
+			0.f, 0.f, 1.f, _trans.z,
+			0.f, 0.f, 0.f, 1.f
+		};
 	}
 
 	Mat4 Mat4::CreateTranslation(float _x, float _y, float _z)
 	{
-		return {};
+		return CreateTranslation(Vec3{ _x, _y, _z });
 	}
 
 	Mat4 Mat4::CreateScale(const Vec3& _scale)
 	{
-		return {};
+		return
+		{
+			_scale.x, 0.f, 0.f, 0.f,
+			0.f, _scale.y, 0.f, 0.f,
+			0.f, 0.f, _scale.z, 0.f,
+			0.f, 0.f, 0.f, 1.f
+		};
 	}
 
 	Mat4 Mat4::CreateScale(float _x, float _y, float _z)
 	{
-		return {};
+		return CreateScale(Vec3{ _x, _y, _z });
 	}
 
 	Mat4 Mat4::CreateXRotation(float _rot)
@@ -69,17 +83,35 @@ namespace MathLib
 
 	Mat4 Mat4::CreateYRotation(float _rot)
 	{
-		return {};
+		const float cos = cosf(_rot);
+		const float sin = sinf(_rot);
+
+		return
+		{
+			cos, 0.f, sin, 0.f,
+			0.f, 1.f, 0.f, 0.f,
+			-sin, 0.f, cos, 0.f,
+			0.f, 0.f, 0.f, 1.f
+		};
 	}
 
 	Mat4 Mat4::CreateZRotation(float _rot)
 	{
-		return {};
+		const float cos = cosf(_rot);
+		const float sin = sinf(_rot);
+
+		return
+		{
+			cos, -sin, 0.f, 0.f,
+			sin, cos, 0.f, 0.f,
+			0.f, 0.f, 1.f, 0.f,
+			0.f, 0.f, 0.f, 1.f
+		};
 	}
 
 	Mat4 Mat4::CreateEulerRotation(float _x, float _y, float _z)
 	{
-		return {};
+		return CreateEulerRotation(Vec3{ _x, _y, _z });
 	}
 
 	Mat4 Mat4::CreateEulerRotation(const Vec3& _euler)
@@ -142,7 +174,16 @@ namespace MathLib
 
 	void Mat4::SetRotationX(float _rot)
 	{
+		const float yLen = sqrtf(m5 * m5 + m6 * m6 + m7 * m7);
+		const float zLen = sqrtf(m9 * m9 + m10 * m10 + m11 * m11);
 
+		const float cos = cosf(_rot);
+		const float sin = sinf(_rot);
+
+		m6 = cos * yLen;
+		m10 = -sin * zLen;
+		m7 = sin * yLen;
+		m11 = cos * zLen;
 	}
 
 	float Mat4::GetRotationX() const
@@ -221,12 +262,18 @@ namespace MathLib
 
 	bool Mat4::operator==(const Mat4& _other) const
 	{
-		return false;
+		return
+			Compare(m1, _other.m1) && Compare(m2, _other.m2) && Compare(m3, _other.m3) && Compare(m3, _other.m3) &&
+			Compare(m5, _other.m5) && Compare(m6, _other.m6) && Compare(m7, _other.m7) && Compare(m8, _other.m8) &&
+			Compare(m9, _other.m9) && Compare(m10, _other.m10) && Compare(m11, _other.m11) && Compare(m12, _other.m12) &&
+			Compare(m13, _other.m13) && Compare(m14, _other.m14) && Compare(m15, _other.m15) && Compare(m16, _other.m16);
+
+			
 	}
 
 	bool Mat4::operator!=(const Mat4& _other) const
 	{
-		return false;
+		return !(*this == _other);
 	}
 
 	Mat4& Mat4::operator=(const Mat4& _other)
@@ -256,6 +303,9 @@ namespace MathLib
 
 	Mat4& Mat4::operator=(Mat4&& _other) noexcept
 	{
+		if (*this == _other)
+			return *this;
+
 		m1 = _other.m1;
 		m2 = _other.m2;
 		m3 = _other.m3;

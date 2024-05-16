@@ -77,7 +77,7 @@ namespace MathLib
 
 	Mat3 Mat3::CreateScale(float _x, float _y, float _z)
 	{
-		return CreateScale(Vec2{ _x, _y, _z });
+		return CreateScale(Vec3{ _x, _y, _z });
 	}
 
 	Mat3 Mat3::CreateEulerRotation(float _x, float _y, float _z)
@@ -358,9 +358,11 @@ namespace MathLib
 			m1 * _rhs.m1 + m2 * _rhs.m4 + m3 * _rhs.m7,
 			m4 * _rhs.m1 + m5 * _rhs.m4 + m6 * _rhs.m7,
 			m7 * _rhs.m1 + m8 * _rhs.m4 + m9 * _rhs.m7,
+
 			m1 * _rhs.m2 + m2 * _rhs.m5 + m3 * _rhs.m8,
 			m4 * _rhs.m2 + m5 * _rhs.m5 + m6 * _rhs.m8,
 			m7 * _rhs.m2 + m8 * _rhs.m5 + m9 * _rhs.m8,
+
 			m1 * _rhs.m3 + m2 * _rhs.m6 + m3 * _rhs.m9,
 			m4 * _rhs.m3 + m5 * _rhs.m6 + m6 * _rhs.m9,
 			m7 * _rhs.m3 + m8 * _rhs.m6 + m9 * _rhs.m9

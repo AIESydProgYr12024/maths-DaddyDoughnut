@@ -33,6 +33,7 @@ namespace MathLib
 	{
 		for (size_t i = 0; i < VEC_4_SIZE; ++i)
 		{
+			data[i] = * (_values.begin() + i);
 		}
 	}
 
@@ -109,7 +110,12 @@ namespace MathLib
 
 	Vec4 Vec4::Cross(const Vec4& _rhs)
 	{
-		return {};
+		return {
+			(y * _rhs.z) - (z * _rhs.y),
+			(z * _rhs.x) - (x * _rhs.z),
+			(x * _rhs.y) - (y * _rhs.x),
+			w * _rhs.w
+		};
 	}
 
 	float Vec4::Magnitude() const
