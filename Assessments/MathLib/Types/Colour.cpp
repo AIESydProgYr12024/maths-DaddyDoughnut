@@ -75,6 +75,11 @@ namespace MathLib
 		value = (value & 0xFFFFFF00) | _a;
 	}
 
+	uint32_t Colour::BitShift()
+	{
+		return ((Alpha() & 0xFF) << 24) | (((Red() >> 24) & 0xFF) << 16) | (((Green() >> 16) & 0xFF) << 8) | ((Blue() >> 8) & 0xFF);
+	}
+
 	Colour::operator Color() const
 	{
 		return { Red(), Green(), Blue(), Alpha() };
