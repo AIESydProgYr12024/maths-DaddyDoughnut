@@ -69,6 +69,7 @@ void AIE18Application::BeginPlay()
 			}
 		)
 	);
+	
 	m_sun->SetParent(m_world);
 
 	m_earth = new PlanetSceneObject(Resources::GetTexture("planets/planet18"));
