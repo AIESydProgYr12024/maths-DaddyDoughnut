@@ -52,12 +52,12 @@ namespace MathLib
 
 	Mat3 Mat3::CreateTranslation(float _x, float _y)
 	{
-		return CreateTranslation(Vec2{ _x, _y });
+		return CreateTranslation(Vec3{ _x, _y });
 	}
 
 	Mat3 Mat3::CreateTranslation(float _x, float _y, float _z)
 	{
-		return CreateTranslation(Vec2{ _x, _y, _z });
+		return CreateTranslation(Vec3{ _x, _y, _z });
 	}
 
 	Mat3 Mat3::CreateScale(const Vec3& _scale)

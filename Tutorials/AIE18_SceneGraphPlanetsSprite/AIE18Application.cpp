@@ -62,25 +62,11 @@ void AIE18Application::BeginPlay()
 	m_sun = new PlanetSceneObject(Resources::GetTexture("planets/planet5"));
 	m_sun->SetRadius(75.f);
 	m_sun->UpdateTransform(
-		Mat3::CreateTranslation(
-			{
-				static_cast<float>(m_width) * .5f,
-				static_cast<float>(m_height) * .5f
-			}
-		)
-	);
+		Mat3::CreateTranslation(MathLib::Vec3{ static_cast<float>(m_width) * .5f, static_cast<float>(m_height) * .5f, 0.f }));
 	
 	m_sun->SetParent(m_world);
 
-	m_earth = new PlanetSceneObject(Resources::GetTexture("planets/planet18"));
-	m_earth->SetRadius(40.f);
-	m_earth->UpdateTransform(Mat3::CreateTranslation({ 200.f, 0.f }));
-	m_earth->SetParent(m_sun);
-
-	m_moon = new PlanetSceneObject(Resources::GetTexture("planets/planet6"));
-	m_moon->SetRadius(10.f);
-	m_moon->UpdateTransform(Mat3::CreateTranslation({ 100.f, 0.f }));
-	m_moon->SetParent(m_earth);
+	
 }
 
 void AIE18Application::Tick(float _dt, AIE18Application* _app)

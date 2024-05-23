@@ -165,8 +165,11 @@
     <ClCompile Include="ILevelBase.cpp" />
     <ClCompile Include="LevelManager.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Resources.cpp" />
     <ClCompile Include="StringUtils.cpp" />
+    <ClCompile Include="Tank.cpp" />
     <ClCompile Include="TestLevel.cpp" />
+    <ClCompile Include="Turret.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h" />
@@ -174,8 +177,11 @@
     <ClInclude Include="ConfigValue.h" />
     <ClInclude Include="ILevelBase.h" />
     <ClInclude Include="LevelManager.h" />
+    <ClInclude Include="Resources.h" />
     <ClInclude Include="StringUtils.h" />
+    <ClInclude Include="Tank.h" />
     <ClInclude Include="TestLevel.h" />
+    <ClInclude Include="Turret.h" />
   </ItemGroup>
   <ItemGroup>
     <CopyFileToFolders Include="assets\config.xml">
@@ -184,6 +190,22 @@
       <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(OutDir)assets/</DestinationFolders>
       <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(OutDir)assets/</DestinationFolders>
     </CopyFileToFolders>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\..\..\..\..\Desktop\TankGameExample\assets\Bullets\bulletBlue.png" />
+    <Image Include="..\..\..\..\..\Desktop\TankGameExample\assets\Bullets\bulletGreen.png" />
+    <Image Include="..\..\..\..\..\Desktop\TankGameExample\assets\Bullets\bulletRed.png" />
+    <Image Include="..\..\..\..\..\Desktop\TankGameExample\assets\Bullets\bulletYellow.png" />
+    <Image Include="..\..\..\..\..\Desktop\TankGameExample\assets\map.png" />
+    <Image Include="..\..\..\..\..\Desktop\TankGameExample\assets\Tanks\barrelBlue.png" />
+    <Image Include="..\..\..\..\..\Desktop\TankGameExample\assets\Tanks\barrelGreen.png" />
+    <Image Include="..\..\..\..\..\Desktop\TankGameExample\assets\Tanks\barrelRed.png" />
+    <Image Include="..\..\..\..\..\Desktop\TankGameExample\assets\Tanks\barrelYellow.png" />
+    <Image Include="..\..\..\..\..\Desktop\TankGameExample\assets\Tanks\tankBlue.png" />
+    <Image Include="..\..\..\..\..\Desktop\TankGameExample\assets\Tanks\tankGreen.png" />
+    <Image Include="..\..\..\..\..\Desktop\TankGameExample\assets\Tanks\tankRed.png" />
+    <Image Include="..\..\..\..\..\Desktop\TankGameExample\assets\Tanks\tankYellow.png" />
+    <Image Include="assets\barrelGreenNew.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

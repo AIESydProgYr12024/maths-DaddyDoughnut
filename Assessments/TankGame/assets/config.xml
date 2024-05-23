@@ -10,7 +10,7 @@
       <Value name="title" value="Tank Game" type="string"/>
     </Category>
     <Category title="player">
-      <Value name="speed" value="100" type="float"/>
+      <Value name="speed" value="260" type="float"/>
     </Category>
   </Categories>
 </Config>
