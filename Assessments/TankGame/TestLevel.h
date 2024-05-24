@@ -8,6 +8,8 @@
 #include "MathLib/Scene/SceneObject.h"
 #include "Tank.h"
 #include "Turret.h"
+#include "Bullet.h"
+#include "Map.h"
 
 using MathLib::Vec2;
 using MathLib::Mat3;
@@ -31,6 +33,8 @@ private:
 	SceneObject* m_world;
 	Tank* m_tank;
 	Turret* m_turret;
+	Bullet* m_bullet;
+	Map* m_map;
 	bool m_resolveCollision;
 
 };

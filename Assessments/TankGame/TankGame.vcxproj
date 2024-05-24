@@ -160,11 +160,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Application.cpp" />
+    <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="Config.cpp" />
     <ClCompile Include="ConfigValue.cpp" />
     <ClCompile Include="ILevelBase.cpp" />
     <ClCompile Include="LevelManager.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Map.cpp" />
     <ClCompile Include="Resources.cpp" />
     <ClCompile Include="StringUtils.cpp" />
     <ClCompile Include="Tank.cpp" />
@@ -173,10 +175,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h" />
+    <ClInclude Include="Bullet.h" />
     <ClInclude Include="Config.h" />
     <ClInclude Include="ConfigValue.h" />
     <ClInclude Include="ILevelBase.h" />
     <ClInclude Include="LevelManager.h" />
+    <ClInclude Include="Map.h" />
     <ClInclude Include="Resources.h" />
     <ClInclude Include="StringUtils.h" />
     <ClInclude Include="Tank.h" />
@@ -196,7 +200,6 @@
     <Image Include="..\..\..\..\..\Desktop\TankGameExample\assets\Bullets\bulletGreen.png" />
     <Image Include="..\..\..\..\..\Desktop\TankGameExample\assets\Bullets\bulletRed.png" />
     <Image Include="..\..\..\..\..\Desktop\TankGameExample\assets\Bullets\bulletYellow.png" />
-    <Image Include="..\..\..\..\..\Desktop\TankGameExample\assets\map.png" />
     <Image Include="..\..\..\..\..\Desktop\TankGameExample\assets\Tanks\barrelBlue.png" />
     <Image Include="..\..\..\..\..\Desktop\TankGameExample\assets\Tanks\barrelGreen.png" />
     <Image Include="..\..\..\..\..\Desktop\TankGameExample\assets\Tanks\barrelRed.png" />
@@ -206,6 +209,7 @@
     <Image Include="..\..\..\..\..\Desktop\TankGameExample\assets\Tanks\tankRed.png" />
     <Image Include="..\..\..\..\..\Desktop\TankGameExample\assets\Tanks\tankYellow.png" />
     <Image Include="assets\barrelGreenNew.png" />
+    <Image Include="assets\map.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

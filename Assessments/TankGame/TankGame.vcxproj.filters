@@ -54,6 +54,12 @@
     <ClCompile Include="Turret.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Bullet.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Map.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h">
@@ -84,6 +90,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Turret.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Bullet.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Map.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -129,10 +141,10 @@
     <Image Include="..\..\..\..\..\Desktop\TankGameExample\assets\Tanks\tankYellow.png">
       <Filter>Resource Files</Filter>
     </Image>
-    <Image Include="..\..\..\..\..\Desktop\TankGameExample\assets\map.png">
+    <Image Include="assets\barrelGreenNew.png">
       <Filter>Resource Files</Filter>
     </Image>
-    <Image Include="assets\barrelGreenNew.png">
+    <Image Include="assets\map.png">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>

@@ -8,7 +8,7 @@
 using MathLib::Vec3;
 
 TestLevel::TestLevel()
-	: ILevelBase("Test"), m_playerPos{ 0, 0 }, m_playerSpeed{ 0 }, m_world{ nullptr }, m_tank{ nullptr }, m_turret{ nullptr }, m_resolveCollision{ false }
+	: ILevelBase("Test"), m_playerPos{ 0, 0 }, m_playerSpeed{ 0 }, m_world{ nullptr }, m_tank{ nullptr }, m_turret{ nullptr }, m_bullet{ nullptr }, m_resolveCollision{ false }
 {
 }
 
@@ -25,11 +25,16 @@ void TestLevel::BeginPlay()
 	const int screenWidth = m_levelManager->GetConfig()->GetValue<int>("window", "width");
 	const int screenHeight = m_levelManager->GetConfig()->GetValue<int>("window", "height");
 
+	Resources::LoadTexture2D("map");
 	Resources::LoadTexture2D("tankGreen");
 	Resources::LoadTexture2D("barrelGreenNew");
+	Resources::LoadTexture2D("bulletGreen");
+	
 
 	m_world = new SceneObject;
 	m_world->UpdateTransform(Mat3(1.f));
+
+	
 
 	m_tank = new Tank(Resources::GetTexture("tankGreen"));
 	m_tank->SetRadius(50.f);
@@ -47,6 +52,19 @@ void TestLevel::BeginPlay()
 	m_turret = new Turret(Resources::GetTexture("barrelGreenNew"));
 	m_turret->SetRadius(25.f);
 	m_turret->SetParent(m_tank);
+
+	m_map = new Map(Resources::GetTexture("map"));
+	m_map->SetRadius(400.f);
+	m_map->UpdateTransform(
+		Mat3::CreateTranslation(
+			Vec3{
+				static_cast<float>(screenWidth) * .5f,
+				static_cast<float>(screenHeight) * .5f,
+				0.f
+			}
+		)
+	);
+	m_map->SetParent(m_world);
 
 	m_playerSpeed = m_levelManager->GetConfig()->GetValue<float>("player", "speed");
 
