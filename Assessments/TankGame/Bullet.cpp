@@ -14,3 +14,10 @@ void Bullet::SetRadius(const float _radius)
 	m_radius = _radius;
 	m_sprite->size = Vec2{ m_radius * 2.f, m_radius * 2.f };
 }
+
+void Bullet::Move(float _dt)
+{
+	UpdateTransform(
+		Mat3::CreateTranslation(Vec2::down * _dt * 400.f)
+	);
+}

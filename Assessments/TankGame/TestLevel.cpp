@@ -1,5 +1,7 @@
 #include "TestLevel.h"
 
+#include <iostream>
+
 #include "Application.h"
 #include "Config.h"
 #include "LevelManager.h"
@@ -8,7 +10,9 @@
 using MathLib::Vec3;
 
 TestLevel::TestLevel()
-	: ILevelBase("Test"), m_playerPos{ 0, 0 }, m_playerSpeed{ 0 }, m_world{ nullptr }, m_tank{ nullptr }, m_turret{ nullptr }, m_bullet{ nullptr }, m_resolveCollision{ false }
+	: ILevelBase("Test"), m_playerPos{ 0, 0 }, m_playerSpeed{ 0 },
+m_world{ nullptr }, m_tank{ nullptr }, m_turret{ nullptr }, m_bullets{ nullptr }, m_map{ nullptr },
+m_resolveCollision{ false }, m_canSpawn{ false }
 {
 }
 
@@ -74,6 +78,29 @@ void TestLevel::Tick(float _dt)
 {
 	const float rot = 240.f * _dt * DEG2RAD;
 
+	// Bullet Spawn
+
+	if (IsKeyUp(KEY_SPACE) && !m_canSpawn)
+	{
+		m_canSpawn = true;
+	}
+	if (IsKeyDown(KEY_SPACE) && m_canSpawn)
+	{
+		m_canSpawn = false;
+
+		m_bullets.emplace_back(new Bullet(Resources::GetTexture("bulletGreen")));
+		m_bullets.back()->SetRadius(12.f);
+		m_bullets.back()->SetParent(m_world);
+		m_bullets.back()->UpdateTransform(m_turret->Global());
+
+		m_bullets.back()->UpdateTransform(
+			Mat3::CreateTranslation(Vec2::down * 80.f)
+		);
+		
+	}
+
+	// -------------
+
 	if (IsKeyDown(KEY_Q))
 		m_turret->UpdateTransform(
 			Mat3::CreateZRotation(-rot / 2)
@@ -102,8 +129,15 @@ void TestLevel::Tick(float _dt)
 		m_tank->UpdateTransform(
 			Mat3::CreateZRotation(rot)
 		);
+	if (m_bullets.size() > 1)
+	{
+		
 
-	
+		for (int i = 1; i < m_bullets.size(); ++i)
+		{
+			m_bullets[i]->Move(_dt);
+		}
+	}
 	
 
 	m_world->Tick(_dt);
