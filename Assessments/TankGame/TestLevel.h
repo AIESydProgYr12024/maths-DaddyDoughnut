@@ -38,6 +38,7 @@ private:
 	Turret* m_turret;
 	vector<Bullet*> m_bullets;
 	Map* m_map;
+	Rect* m_wall1;
 	bool m_resolveCollision;
 	bool m_canSpawn;
 

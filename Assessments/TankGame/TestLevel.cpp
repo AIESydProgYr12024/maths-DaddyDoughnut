@@ -1,5 +1,6 @@
 #include "TestLevel.h"
 
+
 #include <iostream>
 
 #include "Application.h"
@@ -11,7 +12,8 @@ using MathLib::Vec3;
 
 TestLevel::TestLevel()
 	: ILevelBase("Test"), m_playerPos{ 0, 0 }, m_playerSpeed{ 0 },
-m_world{ nullptr }, m_tank{ nullptr }, m_turret{ nullptr }, m_bullets{ nullptr }, m_map{ nullptr },
+m_world{ nullptr }, m_tank{ nullptr }, m_turret{ nullptr }, m_bullets{  }, m_map{ nullptr },
+m_wall1{ new Rect(Vec2{ 310.f, 185.f }, Vec2{ 115.f, 140.f }) },
 m_resolveCollision{ false }, m_canSpawn{ false }
 {
 }
@@ -20,6 +22,8 @@ TestLevel::~TestLevel()
 {
 	delete m_world;
 	m_world = nullptr;
+	delete m_wall1;
+	m_wall1 = nullptr;
 }
 
 
@@ -70,6 +74,7 @@ void TestLevel::BeginPlay()
 	);
 	m_map->SetParent(m_world);
 
+
 	m_playerSpeed = m_levelManager->GetConfig()->GetValue<float>("player", "speed");
 
 }
@@ -82,15 +87,15 @@ void TestLevel::Tick(float _dt)
 
 	if (IsKeyUp(KEY_SPACE) && !m_canSpawn)
 	{
+		
 		m_canSpawn = true;
 	}
 	if (IsKeyDown(KEY_SPACE) && m_canSpawn)
 	{
-		m_canSpawn = false;
+		//Resources::UnloadAll();
 
 		m_bullets.emplace_back(new Bullet(Resources::GetTexture("bulletGreen")));
 		m_bullets.back()->SetRadius(12.f);
-		m_bullets.back()->SetParent(m_world);
 		m_bullets.back()->UpdateTransform(m_turret->Global());
 
 		m_bullets.back()->UpdateTransform(
@@ -129,24 +134,49 @@ void TestLevel::Tick(float _dt)
 		m_tank->UpdateTransform(
 			Mat3::CreateZRotation(rot)
 		);
-	if (m_bullets.size() > 1)
-	{
-		
 
-		for (int i = 1; i < m_bullets.size(); ++i)
+
+	if (m_bullets.size() >= 1)
+	{
+		for (int i = 0; i < m_bullets.size();)
 		{
-			m_bullets[i]->Move(_dt);
+			if (m_bullets[i] != nullptr)
+			{
+				m_bullets[i]->Move(_dt);
+				if (m_bullets[i]->GetCollider()->Intersects(*m_wall1) != nullptr)
+				{
+
+					m_bullets[i]->SetParent(nullptr);
+					m_bullets[i]->SetHasCollided(true);
+
+					delete m_bullets[i];
+					
+					m_bullets.erase(m_bullets.begin() + i);
+				}
+				else
+				{
+					++i;
+				}
+			}
 		}
+		
 	}
-	
 
 	m_world->Tick(_dt);
-
-
 }
+
 
 void TestLevel::Render()
 {
+	if (m_bullets.size() > 1)
+	{
+		for (int i = 1; i < m_bullets.size(); ++i)
+		{
+			DrawRectangleLinesEx(*m_bullets[i]->GetCollider(), 1.f, BLACK);
+		}
+	}
+	DrawRectangleLinesEx(*m_wall1, 1.f, BLACK);
+	
 	m_world->Render();
 }
 
