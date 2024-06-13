@@ -1,7 +1,6 @@
 #include "MathLib/Types/Vec4.h"
 #include "MathLib/MathFunctions.h"
 
-
 namespace MathLib
 {
 	Vec4 Vec4::one = Vec4(1.f, 1.f, 1.f, 1.f);
@@ -54,7 +53,6 @@ namespace MathLib
 		_other.y = 0.f; 
 		_other.z = 0.f;
 		_other.w = 0.f;
-
 	}
 
 	Vec4::~Vec4() = default;
@@ -110,7 +108,8 @@ namespace MathLib
 
 	Vec4 Vec4::Cross(const Vec4& _rhs)
 	{
-		return {
+		return
+		{
 			(y * _rhs.z) - (z * _rhs.y),
 			(z * _rhs.x) - (x * _rhs.z),
 			(x * _rhs.y) - (y * _rhs.x),
@@ -146,7 +145,6 @@ namespace MathLib
 			z = z / mag;
 			w = w / mag;
 		}
-
 	}
 
 	Vec4 Vec4::Normalised() const

@@ -51,11 +51,9 @@ namespace MathLib
 	Vec3::Vec3(Vec3&& _other) noexcept
 		: x{ _other.x }, y{ _other.y }
 	{
-
 		_other.x = 0.f;
 		_other.y = 0.f;
 		_other.z = 0.f;
-
 	}
 
 	Vec3::~Vec3() = default;
@@ -101,7 +99,8 @@ namespace MathLib
 
 	Vec3 Vec3::Cross(const Vec3& _lhs, const Vec3& _rhs)
 	{
-		return {
+		return
+		{
 			(_lhs.y * _rhs.z) - (_lhs.z * _rhs.y),
 			(_lhs.z * _rhs.x) - (_lhs.x * _rhs.z),
 			(_lhs.y * _rhs.x) - (_lhs.x * _rhs.y)
@@ -120,7 +119,8 @@ namespace MathLib
 
 	Vec3 Vec3::Cross(const Vec3& _rhs) const
 	{
-		return {
+		return
+		{
 			(y * _rhs.z) - (z * _rhs.y),
 			(z * _rhs.x) - (x * _rhs.z),
 			(x * _rhs.y) - (y * _rhs.x)

@@ -23,7 +23,6 @@ namespace MathLib
 				float y;
 				float z;
 			};
-
 			float data[VEC_3_SIZE];
 		};
 
@@ -37,7 +36,6 @@ namespace MathLib
 		static Vec3 right;
 		static Vec3 forward;
 		static Vec3 back;
-
 
 	public:
 		Vec3();
@@ -95,6 +93,5 @@ namespace MathLib
 		Vec3& operator=(Vec3&& _other) noexcept;
 
 	};
-
 	extern Vec3 operator*(float _lhs, const Vec3& _rhs);
 }
