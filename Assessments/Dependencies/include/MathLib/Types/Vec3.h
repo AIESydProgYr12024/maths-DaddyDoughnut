@@ -38,7 +38,6 @@ namespace MathLib
 		static Vec3 forward;
 		static Vec3 back;
 
-
 	public:
 		Vec3();
 		Vec3(float _scalar);

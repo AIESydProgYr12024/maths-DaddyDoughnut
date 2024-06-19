@@ -1,5 +1,6 @@
 #include "TestLevel.h"
 
+
 #include <iostream>
 
 #include "Application.h"
@@ -11,15 +12,35 @@ using MathLib::Vec3;
 
 TestLevel::TestLevel()
 	: ILevelBase("Test"), m_playerPos{ 0, 0 }, m_playerSpeed{ 0 },
-m_world{ nullptr }, m_tank{ nullptr }, m_turret{ nullptr }, m_bullets{ nullptr }, m_map{ nullptr },
+m_world{ nullptr }, m_tank{ nullptr }, m_turret{ nullptr }, m_map{ nullptr },
+m_wall1{ new Rect(Vec2{ 310.f, 185.f }, Vec2{ 115.f, 140.f }) },
+m_wall2{ new Rect(Vec2{ 696.f, 365.f }, Vec2{ 40.f, 205.f }) },
+m_wall3{ new Rect(Vec2{ 558.f, 550.f }, Vec2{ 178.f, 20.f }) },
+m_wall4{ new Rect(Vec2{ 758, 735 }, Vec2{ 65, 40 }) },
 m_resolveCollision{ false }, m_canSpawn{ false }
 {
 }
 
 TestLevel::~TestLevel()
 {
+	for (Bullet* bullet : m_bullets)
+	{
+		bullet->SetParent(nullptr);
+		bullet = nullptr;
+		delete bullet;
+	}
+
 	delete m_world;
 	m_world = nullptr;
+	delete m_wall1;
+	m_wall1 = nullptr;
+	delete m_wall2;
+	m_wall2 = nullptr;
+	delete m_wall3;
+	m_wall3 = nullptr;
+	delete m_wall4;
+	m_wall4 = nullptr;
+	
 }
 
 
@@ -70,18 +91,58 @@ void TestLevel::BeginPlay()
 	);
 	m_map->SetParent(m_world);
 
+
 	m_playerSpeed = m_levelManager->GetConfig()->GetValue<float>("player", "speed");
 
 }
 
 void TestLevel::Tick(float _dt)
 {
+	
 	const float rot = 240.f * _dt * DEG2RAD;
 
-	// Bullet Spawn
+	//loop through bullets 
+	if (m_bullets.size() >= 1)
+	{
+		for (int i = 0; i < m_bullets.size();)
+		{
+			if (m_bullets[i] != nullptr)
+			{
+				m_bullets[i]->Move(_dt);
 
+				// delete bullet if 
+				if (
+					m_bullets[i]->GetCollider()->Intersects(*m_wall1) != nullptr ||
+					m_bullets[i]->GetCollider()->Intersects(*m_wall2) != nullptr ||
+					m_bullets[i]->GetCollider()->Intersects(*m_wall3) != nullptr ||
+					m_bullets[i]->GetCollider()->Intersects(*m_wall4) != nullptr ||
+					abs(m_bullets[i]->Global().GetTranslation().x) >= static_cast<float>(m_levelManager->GetConfig()->GetValue<int>("window", "width")) ||
+					abs(m_bullets[i]->Global().GetTranslation().y) >= static_cast<float>(m_levelManager->GetConfig()->GetValue<int>("window", "height"))
+					)
+				{
+					m_bullets[i]->SetHasCollided(true);
+
+					m_bullets[i]->SetParent(nullptr);
+
+					m_bullets[i] = nullptr;
+
+					delete m_bullets[i];
+
+					m_bullets.erase(m_bullets.begin() + i);
+				}
+				else
+				{
+					++i;
+				}
+			}
+		}
+
+	}
+
+	// Bullet Spawn
 	if (IsKeyUp(KEY_SPACE) && !m_canSpawn)
 	{
+		
 		m_canSpawn = true;
 	}
 	if (IsKeyDown(KEY_SPACE) && m_canSpawn)
@@ -90,12 +151,12 @@ void TestLevel::Tick(float _dt)
 
 		m_bullets.emplace_back(new Bullet(Resources::GetTexture("bulletGreen")));
 		m_bullets.back()->SetRadius(12.f);
-		m_bullets.back()->SetParent(m_world);
 		m_bullets.back()->UpdateTransform(m_turret->Global());
 
 		m_bullets.back()->UpdateTransform(
 			Mat3::CreateTranslation(Vec2::down * 80.f)
 		);
+		m_bullets.back()->SetParent(m_world);
 		
 	}
 
@@ -129,24 +190,20 @@ void TestLevel::Tick(float _dt)
 		m_tank->UpdateTransform(
 			Mat3::CreateZRotation(rot)
 		);
-	if (m_bullets.size() > 1)
-	{
-		
 
-		for (int i = 1; i < m_bullets.size(); ++i)
-		{
-			m_bullets[i]->Move(_dt);
-		}
-	}
+
 	
 
 	m_world->Tick(_dt);
-
-
 }
 
 void TestLevel::Render()
 {
+	DrawRectangleLinesEx(*m_wall1, 1.f, BLACK);
+	DrawRectangleLinesEx(*m_wall2, 1.f, BLACK);
+	DrawRectangleLinesEx(*m_wall3, 1.f, BLACK);
+	DrawRectangleLinesEx(*m_wall4, 1.f, BLACK);
+	
 	m_world->Render();
 }
 

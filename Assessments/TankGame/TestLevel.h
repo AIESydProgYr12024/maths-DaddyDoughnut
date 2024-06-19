@@ -1,6 +1,7 @@
 #pragma once
 
 #include <vector>
+#include<cstdlib>
 
 #include "ILevelBase.h"
 
@@ -38,6 +39,10 @@ private:
 	Turret* m_turret;
 	vector<Bullet*> m_bullets;
 	Map* m_map;
+	Rect* m_wall1;
+	Rect* m_wall2;
+	Rect* m_wall3;
+	Rect* m_wall4;
 	bool m_resolveCollision;
 	bool m_canSpawn;
 

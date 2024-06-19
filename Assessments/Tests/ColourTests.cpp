@@ -95,10 +95,12 @@ namespace MathLibraryTests
 			const uint8_t alpha = actual.Alpha();
 			Assert::AreEqual(alpha, static_cast<uint8_t>(255));
 		}
+		// Bit Shift
 		TEST_METHOD(BitShift)
 		{
-			Colour actual(32, 64, 10, 128);
-			Assert::AreEqual(actual.BitShift(), Colour(128, 32, 64, 10).value);
+			Colour actual(32, 64, 0, 255);
+
+			Assert::AreEqual(Colour(0, 32, 64, 0), actual.BitShift());
 		}
 	};
 }

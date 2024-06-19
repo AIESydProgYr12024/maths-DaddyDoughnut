@@ -1,6 +1,6 @@
 #include "MathLib/Scene/SceneObject.h"
 
-
+#include <iostream>
 
 
 namespace MathLib
@@ -15,14 +15,15 @@ namespace MathLib
 	SceneObject::~SceneObject()
 	{
 		for (const auto& child : m_children)
-			delete child;
+   			delete child;
 		m_children.clear();
 	}
 
 	void SceneObject::Tick(float _dt)
 	{
-		OnTick(_dt);
 
+		std::cout << m_children.size() << "\n";
+		OnTick(_dt);
 		for (auto& update : m_childlistChanges)
 			update();
 
@@ -96,13 +97,13 @@ namespace MathLib
 	void SceneObject::RemoveChild(SceneObject* _child)
 	{
 		m_childlistChanges.emplace_back([_child, this]
+		{
+			if (_child->m_parent == this)
 			{
-				if (_child->m_parent == this)
-				{
-					_child->m_parent = nullptr;
-					m_children.remove(_child);
-				}
-			});
+				_child->m_parent = nullptr;
+				m_children.remove(_child);
+			}
+		});
 
 	}
 }

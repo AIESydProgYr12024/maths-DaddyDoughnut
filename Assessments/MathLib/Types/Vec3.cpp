@@ -34,7 +34,7 @@ namespace MathLib
 	{
 		for (size_t i = 0; i < VEC_3_SIZE; ++i)
 		{
-			data[i] = * (_values.begin() + i);
+			data[i] = *(_values.begin() + i);
 		}
 	}
 
@@ -44,7 +44,7 @@ namespace MathLib
 	}
 
 	Vec3::Vec3(const Vec3& _other)
-		: x{ _other.x }, y{ _other.y}
+		: x{ _other.x }, y{ _other.y }
 	{
 	}
 
@@ -101,7 +101,8 @@ namespace MathLib
 
 	Vec3 Vec3::Cross(const Vec3& _lhs, const Vec3& _rhs)
 	{
-		return {
+		return
+		{
 			(_lhs.y * _rhs.z) - (_lhs.z * _rhs.y),
 			(_lhs.z * _rhs.x) - (_lhs.x * _rhs.z),
 			(_lhs.y * _rhs.x) - (_lhs.x * _rhs.y)
@@ -120,7 +121,8 @@ namespace MathLib
 
 	Vec3 Vec3::Cross(const Vec3& _rhs) const
 	{
-		return {
+		return
+		{
 			(y * _rhs.z) - (z * _rhs.y),
 			(z * _rhs.x) - (x * _rhs.z),
 			(x * _rhs.y) - (y * _rhs.x)

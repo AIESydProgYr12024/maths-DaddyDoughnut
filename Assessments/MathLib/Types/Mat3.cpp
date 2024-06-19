@@ -7,11 +7,8 @@
 
 using std::stringstream;
 
-
 namespace MathLib
 {
-	
-	
 	Mat3::Mat3() :
 		m1{ 0.f }, m4{ 0.f }, m7{ 0.f },
 		m2{ 0.f }, m5{ 0.f }, m8{ 0.f },
@@ -37,7 +34,6 @@ namespace MathLib
 	{
 		for (size_t i = 0; i < MAT_3_SIZE; ++i)
 			data[i] = _matrix[i];
-
 	}
 
 	Mat3 Mat3::CreateTranslation(const Vec3& _trans)
@@ -52,12 +48,12 @@ namespace MathLib
 
 	Mat3 Mat3::CreateTranslation(float _x, float _y)
 	{
-		return CreateTranslation(Vec3{ _x, _y });
+		return CreateTranslation(Vec2{ _x, _y });
 	}
 
 	Mat3 Mat3::CreateTranslation(float _x, float _y, float _z)
 	{
-		return CreateTranslation(Vec3{ _x, _y, _z });
+		return CreateTranslation(Vec2{ _x, _y, _z });
 	}
 
 	Mat3 Mat3::CreateScale(const Vec3& _scale)
@@ -109,14 +105,13 @@ namespace MathLib
 		};
 	}
 
-	string Mat3::ToString() const 
+	string Mat3::ToString() const
 	{
 		stringstream stream;
 
-
 		stream << "(";
 
-		for(size_t i = 0; i < MAT_3_SIZE; ++i)
+		for (size_t i = 0; i < MAT_3_SIZE; ++i)
 		{
 			stream << data[i];
 
@@ -167,9 +162,6 @@ namespace MathLib
 		const Mat3 rotMat = xRotMat * yRotMat * zRotMat;
 
 		return transMat * rotMat * scaleMat;
-		
-
-		return {};
 	}
 
 	Mat3 Mat3::CreateTranslation(const Vec2& _trans)
@@ -337,8 +329,8 @@ namespace MathLib
 	{
 		return
 		{
-			_point.x* m1 + _point.y * m4 + m7,
-			_point.x* m2 + _point.y * m5 + m8
+			_point.x * m1 + _point.y * m4 + m7,
+			_point.x * m2 + _point.y * m5 + m8
 		};
 	}
 
@@ -381,7 +373,6 @@ namespace MathLib
 
 	bool Mat3::operator==(const Mat3& _other) const
 	{
-		
 		return
 			Compare(m1, _other.m1) && Compare(m2, _other.m2) && Compare(m3, _other.m3) &&
 			Compare(m4, _other.m4) && Compare(m5, _other.m5) && Compare(m6, _other.m6) &&

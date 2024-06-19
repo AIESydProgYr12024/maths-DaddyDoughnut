@@ -64,14 +64,14 @@ namespace MathLib
 
 	Vec2 Vec2::Scale(const Vec2& _lhs, float _rhs)
 	{
-		return {_lhs.x * _rhs, _lhs.y * _rhs};
+		return { _lhs.x * _rhs, _lhs.y * _rhs };
 	}
 
 	Vec2 Vec2::Normalised(const Vec2& _vec)
 	{
 		const float mag = _vec.Magnitude();
 
-		if(Compare(mag, 0.f))
+		if (Compare(mag, 0.f))
 		{
 			return Vec2{ 0.f, 0.f };
 		}
@@ -79,7 +79,7 @@ namespace MathLib
 		{
 			return Vec2{ _vec.x / mag, _vec.y / mag };
 		}
-		
+
 	}
 
 	float Vec2::Distance(const Vec2& _a, const Vec2& _b)
@@ -119,7 +119,7 @@ namespace MathLib
 
 	void Vec2::Normalise()
 	{
-	
+
 		const float mag = Magnitude();
 
 		if (Compare(mag, 0.f))
@@ -132,7 +132,7 @@ namespace MathLib
 			x = x / mag;
 			y = y / mag;
 		}
-		
+
 	}
 
 	Vec2 Vec2::Normalised() const
@@ -147,7 +147,7 @@ namespace MathLib
 		{
 			return Vec2{ x / mag, y / mag };
 		}
-		
+
 	}
 
 	float Vec2::Rotation() const
@@ -223,7 +223,7 @@ namespace MathLib
 
 	Vec2 Vec2::operator*(float _other) const
 	{
-		return { x * _other, y * _other};
+		return { x * _other, y * _other };
 	}
 
 	Vec2& Vec2::operator*=(float _other)
@@ -287,5 +287,4 @@ namespace MathLib
 	{
 		return { _rhs.x * _lhs, _rhs.y * _lhs };
 	}
-
 }

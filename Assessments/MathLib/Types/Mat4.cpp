@@ -2,6 +2,10 @@
 
 #include "MathLib/MathFunctions.h"
 
+#include <sstream>
+
+using std::stringstream;
+
 namespace MathLib
 {
 	Mat4::Mat4() :
@@ -130,12 +134,32 @@ namespace MathLib
 
 	Vec4 Mat4::Transposed()
 	{
-		return {};
+		return
+		{
+			m1, m2, m3, m4,
+			m5, m6, m7, m8,
+			m9, m10, m11, m12,
+			m13, m14, m15, m16
+		};
 	}
 
 	string Mat4::ToString() const
 	{
-		return "";
+		std::stringstream stream;
+
+		stream << "(";
+
+		for (size_t i = 0; i < MAT_4_SIZE; ++i)
+		{
+			stream << data[i];
+
+			if (i + 1 < MAT_4_SIZE)
+				stream << ", ";
+		}
+
+		stream << ")";
+
+		return stream.str();
 	}
 
 	Mat4::Mat4(const Mat4& _other) :
@@ -188,38 +212,99 @@ namespace MathLib
 
 	float Mat4::GetRotationX() const
 	{
-		return 0;
+		return atan2(m2, m1);
 	}
 
 	void Mat4::SetRotationY(float _rot)
 	{
+		const float xLen = sqrtf(m1 * m1 + m2 * m2 + m3 * m3);
+		const float zLen = sqrtf(m9 * m9 + m10 * m10 + m11 * m11);
+
+		const float cos = cosf(_rot);
+		const float sin = sinf(_rot);
+
+		m6 = cos * xLen;
+		m10 = sin * zLen;
+		m7 = -sin * xLen;
+		m11 = cos * zLen;
 	}
 
 	float Mat4::GetRotationY() const
 	{
-		return 0;
+		return atan2f(-m5, m6);
 	}
 
 	void Mat4::SetRotationZ(float _rot)
 	{
+		const float yLen = sqrtf(m5 * m5 + m6 * m6 + m7 * m7);
+		const float xLen = sqrtf(m1 * m1 + m2 * m2 + m3 * m3);
+
+		const float cos = cosf(_rot);
+		const float sin = sinf(_rot);
+
+		m1 = cos * xLen;
+		m5 = -sin * yLen;
+		m2 = sin * xLen;
+		m6 = cos * yLen;
 	}
 
 	float Mat4::GetRotationZ() const
 	{
-		return 0;
+		return atan2f(m9, m11);
 	}
 
 	void Mat4::SetTranslation(const Vec3& _trans)
 	{
+		m13 = _trans.x;
+		m14 = _trans.y;
+		m15 = _trans.z;
 	}
 
 	void Mat4::Translate(const Vec3& _trans)
 	{
+		m13 = _trans.x;
+		m14 = _trans.y;
+		m15 = _trans.z;
 	}
 
 	Vec3 Mat4::GetTranslation()
 	{
-		return {};
+		return { m13, m14, m15 };
+	}
+
+	void Mat4::SetScale(const Vec3& _scale)
+	{
+		const float xAlen = sqrtf(m1 * m1 + m2 * m2 + m3 * m3);
+		const float yAlen = sqrtf(m5 * m5 + m6 * m6 + m7 * m7);
+		const float zAlen = sqrtf(m9 * m9 + m10 * m10 + m11 * m11);
+
+		if (xAlen > 0.f)
+		{
+			m1 = m1 / xAlen * _scale.x;
+			m2 = m2 / xAlen * _scale.x;
+			m3 = m3 / xAlen * _scale.x;
+		}
+		if (yAlen > 0.f)
+		{
+			m5 = m5 / yAlen * _scale.y;
+			m6 = m6 / yAlen * _scale.y;
+			m7 = m7 / yAlen * _scale.y;
+		}
+		if (zAlen > 0.f)
+		{
+			m9 = m9 / zAlen * _scale.z;
+			m10 = m10 / zAlen * _scale.z;
+			m11 = m11 / zAlen * _scale.z;
+		}
+	}
+
+	Vec3 Mat4::GetScale() const
+	{
+		const float xAlen = sqrtf(m1 * m1 + m2 * m2 + m3 * m3);
+		const float yAlen = sqrtf(m5 * m5 + m6 * m6 + m7 * m7);
+		const float zAlen = sqrtf(m9 * m9 + m10 * m10 + m11 * m11);
+
+		return { xAlen, yAlen, zAlen };
 	}
 
 	Mat4 Mat4::operator*(const Mat4& _rhs) const
@@ -245,7 +330,6 @@ namespace MathLib
 			m5 * _rhs.m4 + m6 * _rhs.m8 + m7 * _rhs.m12 + m8 * _rhs.m16,
 			m9 * _rhs.m4 + m10 * _rhs.m8 + m11 * _rhs.m12 + m12 * _rhs.m16,
 			m13 * _rhs.m4 + m14 * _rhs.m8 + m15 * _rhs.m12 + m16 * _rhs.m16
-			
 		};
 	}
 
@@ -267,8 +351,6 @@ namespace MathLib
 			Compare(m5, _other.m5) && Compare(m6, _other.m6) && Compare(m7, _other.m7) && Compare(m8, _other.m8) &&
 			Compare(m9, _other.m9) && Compare(m10, _other.m10) && Compare(m11, _other.m11) && Compare(m12, _other.m12) &&
 			Compare(m13, _other.m13) && Compare(m14, _other.m14) && Compare(m15, _other.m15) && Compare(m16, _other.m16);
-
-			
 	}
 
 	bool Mat4::operator!=(const Mat4& _other) const
