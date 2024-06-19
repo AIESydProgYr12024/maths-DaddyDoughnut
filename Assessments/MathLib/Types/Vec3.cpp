@@ -34,7 +34,7 @@ namespace MathLib
 	{
 		for (size_t i = 0; i < VEC_3_SIZE; ++i)
 		{
-			data[i] = * (_values.begin() + i);
+			data[i] = *(_values.begin() + i);
 		}
 	}
 
@@ -44,16 +44,18 @@ namespace MathLib
 	}
 
 	Vec3::Vec3(const Vec3& _other)
-		: x{ _other.x }, y{ _other.y}
+		: x{ _other.x }, y{ _other.y }
 	{
 	}
 
 	Vec3::Vec3(Vec3&& _other) noexcept
 		: x{ _other.x }, y{ _other.y }
 	{
+
 		_other.x = 0.f;
 		_other.y = 0.f;
 		_other.z = 0.f;
+
 	}
 
 	Vec3::~Vec3() = default;

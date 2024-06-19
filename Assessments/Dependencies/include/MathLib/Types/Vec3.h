@@ -23,6 +23,7 @@ namespace MathLib
 				float y;
 				float z;
 			};
+
 			float data[VEC_3_SIZE];
 		};
 
@@ -93,5 +94,6 @@ namespace MathLib
 		Vec3& operator=(Vec3&& _other) noexcept;
 
 	};
+
 	extern Vec3 operator*(float _lhs, const Vec3& _rhs);
 }

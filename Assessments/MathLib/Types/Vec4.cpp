@@ -32,7 +32,7 @@ namespace MathLib
 	{
 		for (size_t i = 0; i < VEC_4_SIZE; ++i)
 		{
-			data[i] = * (_values.begin() + i);
+			data[i] = *(_values.begin() + i);
 		}
 	}
 
@@ -50,7 +50,7 @@ namespace MathLib
 		: x{ _other.x }, y{ _other.y }, z{ _other.z }, w{ _other.w }
 	{
 		_other.x = 0.f;
-		_other.y = 0.f; 
+		_other.y = 0.f;
 		_other.z = 0.f;
 		_other.w = 0.f;
 	}
@@ -168,7 +168,7 @@ namespace MathLib
 
 	Vec4::operator Vector4() const
 	{
-		return { x, y, z, w};
+		return { x, y, z, w };
 	}
 
 	bool Vec4::operator==(const Vec4& _other) const
@@ -203,8 +203,8 @@ namespace MathLib
 
 	Vec4& Vec4::operator+=(const Vec4& _other)
 	{
-		x += _other.x; 
-		y += _other.y; 
+		x += _other.x;
+		y += _other.y;
 		z += _other.z;
 		w += _other.w;
 
@@ -218,8 +218,8 @@ namespace MathLib
 
 	Vec4& Vec4::operator*=(float _other)
 	{
-		x *= _other; 
-		y *= _other; 
+		x *= _other;
+		y *= _other;
 		z *= _other;
 		w *= _other;
 

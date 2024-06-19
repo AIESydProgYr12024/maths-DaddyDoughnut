@@ -15,8 +15,6 @@ namespace MathLib
 		{
 			struct
 			{
-				
-
 				float m1;  // 11
 				float m2;  // 21
 				float m3;  // 31
@@ -58,17 +56,17 @@ namespace MathLib
 	public:
 		static Mat4 CreateTranslation(const Vec3& _trans);
 		static Mat4 CreateTranslation(float _x, float _y, float _z);
-				  
+
 		static Mat4 CreateScale(const Vec3& _scale);
 		static Mat4 CreateScale(float _x, float _y, float _z);
-				  
+
 		static Mat4 CreateXRotation(float _rot);
 		static Mat4 CreateYRotation(float _rot);
 		static Mat4 CreateZRotation(float _rot);
-				  
+
 		static Mat4 CreateEulerRotation(float _x, float _y, float _z);
 		static Mat4 CreateEulerRotation(const Vec3& _euler);
-				  
+
 		static Mat4 Identity();
 
 	public:
@@ -85,9 +83,13 @@ namespace MathLib
 		void Translate(const Vec3& _trans);
 		Vec3 GetTranslation();
 
+		void SetScale(const Vec3& _scale);
+		Vec3 GetScale() const;
+
 		Vec4 Transposed();
 
 		string ToString() const;
+
 	public:
 		Mat4 operator*(const Mat4& _rhs) const;
 		Vec4 operator*(const Vec4& _rhs) const;
@@ -97,6 +99,5 @@ namespace MathLib
 
 		Mat4& operator=(const Mat4& _other);
 		Mat4& operator=(Mat4&& _other) noexcept;
-
 	};
 }

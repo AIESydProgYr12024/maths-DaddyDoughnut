@@ -5,7 +5,6 @@
 
 #include <string>
 
-
 using std::string;
 
 #define MAT_3_SIZE (VEC_3_SIZE * VEC_3_SIZE)
@@ -19,8 +18,6 @@ namespace MathLib
 		{
 			struct
 			{
-				
-
 				float m1; // 11
 				float m2; // 21
 				float m3; // 31
@@ -36,7 +33,6 @@ namespace MathLib
 			// 31 32 33
 			float data[MAT_3_SIZE];
 		};
-		
 
 	public:
 		Mat3();
@@ -75,8 +71,6 @@ namespace MathLib
 
 		static Mat3 Identity();
 
-		
-
 	public:
 		void SetRotationX(float _rot);
 		float GetRotationX() const;
@@ -100,6 +94,7 @@ namespace MathLib
 		Mat3 Transposed();
 
 		string ToString() const;
+
 	public:
 		Mat3 operator*(const Mat3& _rhs) const;
 		Vec3 operator*(const Vec3& _rhs) const;
@@ -109,6 +104,5 @@ namespace MathLib
 
 		Mat3& operator=(const Mat3& _other);
 		Mat3& operator=(Mat3&& _other) noexcept;
-
 	};
 }
