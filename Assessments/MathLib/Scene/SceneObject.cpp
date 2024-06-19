@@ -97,13 +97,13 @@ namespace MathLib
 	void SceneObject::RemoveChild(SceneObject* _child)
 	{
 		m_childlistChanges.emplace_back([_child, this]
+		{
+			if (_child->m_parent == this)
 			{
-				if (_child->m_parent == this)
-				{
-					_child->m_parent = nullptr;
-					m_children.remove(_child);
-				}
-			});
+				_child->m_parent = nullptr;
+				m_children.remove(_child);
+			}
+		});
 
 	}
 }

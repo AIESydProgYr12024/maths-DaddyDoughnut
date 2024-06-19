@@ -168,7 +168,7 @@ void Config::HandleVector(const string& _category, const string& _id, const stri
 {
 	auto converter = [](const string& _val) -> float
 		{
-			return std::stof(_val);
+			return 0;
 		};
 
 	const vector<float> values = StringUtils::Split<float>(_value, ',', converter);

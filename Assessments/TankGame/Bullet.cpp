@@ -13,10 +13,11 @@ m_hasCollided{ false }
 
 Bullet::~Bullet()
 {
-	delete m_sprite;
 	m_sprite = nullptr;
-	delete m_collider;
+	delete m_sprite;
+
 	m_collider = nullptr;
+	delete m_collider;
 }
 
 void Bullet::SetRadius(const float _radius)
@@ -32,7 +33,6 @@ void Bullet::SetHasCollided(bool _value)
 
 void Bullet::Move(float _dt)
 {
-	
 	UpdateTransform(
 		Mat3::CreateTranslation(Vec2::down * _dt * 400.f)
 	);
@@ -43,6 +43,3 @@ MathLib::Rect* Bullet::GetCollider()
 {
 	return m_collider;
 }
-
-
-
