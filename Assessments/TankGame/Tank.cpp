@@ -3,6 +3,7 @@
 using MathLib::Vec2;
 using MathLib::Mat3;
 
+// Constructor
 Tank::Tank(Texture2D* _texture)
 	: m_radius{ 0.f }, m_sprite{ new SpriteObject(_texture) }
 {
@@ -10,14 +11,17 @@ Tank::Tank(Texture2D* _texture)
 	m_sprite->SetParent(this);
 }
 
+// Set Size Of Tank
 void Tank::SetRadius(const float _radius)
 {
 	m_radius = _radius;
 	m_sprite->size = Vec2{ m_radius * 2.f, m_radius * 2.f };
 }
 
+// Move And Rotate Tank
 void Tank::Move(float _dt, float _speed)
 {
+	// Get Rotation speed for tick
 	const float rot = 240.f * _dt * DEG2RAD;
 
 	// Move Tank

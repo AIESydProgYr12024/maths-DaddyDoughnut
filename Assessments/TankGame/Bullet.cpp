@@ -2,6 +2,7 @@
 
 using MathLib::Vec2;
 
+// Constructor
 Bullet::Bullet(Texture2D* _texture)
 	: m_radius{ 0.f }, m_sprite{ new SpriteObject(_texture) },
 	m_collider{ new MathLib::Rect(Vec2{ 50.f, 50.f }, Vec2{ 16.f, 16.f }) },
@@ -11,23 +12,21 @@ Bullet::Bullet(Texture2D* _texture)
 	m_sprite->SetParent(this);
 }
 
+// Destructor
 Bullet::~Bullet()
 {
 	delete m_collider;
 	m_collider = nullptr;
-
 }
+
+// Set Size Of Bullet
 void Bullet::SetRadius(const float _radius)
 {
 	m_radius = _radius;
 	m_sprite->size = Vec2{ m_radius * 2.f, m_radius * 3.f };
 }
 
-void Bullet::SetHasCollided(bool _value)
-{
-	m_hasCollided = _value;
-}
-
+// Move Bullet
 void Bullet::Move(float _dt)
 {
 	UpdateTransform(
@@ -36,7 +35,8 @@ void Bullet::Move(float _dt)
 	m_collider->center = m_transform.GetTranslation();
 }
 
-MathLib::Rect* Bullet::GetCollider()
+// Return Bullet's Collider
+MathLib::Rect* Bullet::GetCollider() const
 {
 	return m_collider;
 }

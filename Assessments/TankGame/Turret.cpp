@@ -2,6 +2,7 @@
 
 using MathLib::Vec2;
 
+// Constructor
 Turret::Turret(Texture2D* _texture)
 	: m_radius{ 0.f }, m_sprite{ new SpriteObject(_texture) }
 {
@@ -9,12 +10,14 @@ Turret::Turret(Texture2D* _texture)
 	m_sprite->SetParent(this);
 }
 
+// Set Size of Turret
 void Turret::SetRadius(const float _radius)
 {
 	m_radius = _radius;
 	m_sprite->size = Vec2{ m_radius * 2.f, m_radius * 6.f };
 }
 
+// Rotate Turret
 void Turret::Move(float _dt, float _speed)
 {
 	const float rot = 240.f * _dt * DEG2RAD;

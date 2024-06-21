@@ -26,6 +26,7 @@ namespace MathLib
 		return false;
 	}
 
+	// Returns a hit pointer if the Circle collides with the point
 	Hit* Circle::Intersects(const Vec2& _point) const
 	{
 		const float distance = Vec2::Distance(center, _point);
@@ -44,6 +45,7 @@ namespace MathLib
 		};
 	}
 
+	// Returns a hit pointer if the Circle collides with another Circle
 	Hit* Circle::Intersects(const Circle& _circle) const
 	{
 		const float distance = Vec2::Distance(center, _circle.center);
@@ -62,23 +64,24 @@ namespace MathLib
 			normal,
 			delta
 		};
-
-
-		return nullptr;
 	}
 
+	// Equality operator
 	bool Circle::operator==(const Circle& _other) const
 	{
 		return center == _other.center && Compare(radius, _other.radius);
 	}
 
+	// Inequality operator
 	bool Circle::operator!=(const Circle& _other) const
 	{
 		return !(*this == _other);
 	}
 
+	// Copy constructor
 	Circle& Circle::operator=(const Circle& _other) = default;
 
+	// Move constructor
 	Circle& Circle::operator=(Circle&& _other) noexcept
 	{
 		if (*this == _other)
@@ -91,5 +94,4 @@ namespace MathLib
 
 		return *this;
 	}
-
 }

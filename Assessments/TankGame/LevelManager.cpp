@@ -5,11 +5,13 @@
 #include "Application.h"
 #include "ILevelBase.h"
 
+// Constructor
 LevelManager::LevelManager(Application* _app)
 	: m_app{ _app }
 {
 }
 
+// Destructor
 LevelManager::~LevelManager()
 {
 	for (const auto& level : m_levels | std::views::values)
@@ -22,11 +24,13 @@ LevelManager::~LevelManager()
 
 void LevelManager::Tick(const float _dt)
 {
+	// Loop through object to open and close marked level's
 	for (auto& change : m_openListChanges)
 		change();
 
 	m_openListChanges.clear();
 
+	// Loop through object to tick all open levels
 	for (const auto& level : m_openLevels)
 	{
 		level->GetWorld()->Tick(_dt);
@@ -34,6 +38,7 @@ void LevelManager::Tick(const float _dt)
 	}
 }
 
+// Render level and its world object
 void LevelManager::Render() const
 {
 	for (const auto& level : m_openLevels)
@@ -43,6 +48,7 @@ void LevelManager::Render() const
 	}
 }
 
+// Open level and Call BeginPlay function
 void LevelManager::OpenLevel(const char* _name)
 {
 	if (!m_levels.contains(_name))
@@ -59,6 +65,7 @@ void LevelManager::OpenLevel(const char* _name)
 		});
 }
 
+// Call levels EndPlay function and Close level
 void LevelManager::ExitLevel(const char* _name)
 {
 	if (!m_levels.contains(_name))
@@ -75,6 +82,7 @@ void LevelManager::ExitLevel(const char* _name)
 		});
 }
 
+// Add level to m_levels
 void LevelManager::AddLevel(ILevelBase* _level)
 {
 	if (m_levels.contains(_level->Name()))
@@ -84,11 +92,13 @@ void LevelManager::AddLevel(ILevelBase* _level)
 	_level->m_levelManager = this;
 }
 
+// Return pointer to aplication
 Application* LevelManager::GetApp() const
 {
 	return m_app;
 }
 
+// Return pointer to config
 Config* LevelManager::GetConfig() const
 {
 	return m_app->GetConfig();

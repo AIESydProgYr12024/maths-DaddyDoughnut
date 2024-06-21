@@ -17,9 +17,9 @@ public:
 
 public:
 	void SetRadius(const float _radius);
-	void SetHasCollided(bool _value);
 	void Move(float _dt);
-	MathLib::Rect* GetCollider();
+	MathLib::Rect* GetCollider() const;
+
 private:
 	float m_radius;
 	SpriteObject* m_sprite;

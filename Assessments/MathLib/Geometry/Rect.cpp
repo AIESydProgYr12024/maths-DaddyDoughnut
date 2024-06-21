@@ -24,21 +24,25 @@ namespace MathLib
 
 	Rect::~Rect() = default;
 
+	// Return Size of Rect
 	Vec2 Rect::Size() const
 	{
 		return center * 2.f;
 	}
 
+	// Return minimum corner of the Rect
 	Vec2 Rect::Min() const
 	{
 		return center - extents;
 	}
 
+	// Return maximum corner of the Rect
 	Vec2 Rect::Max() const
 	{
 		return center + extents;
 	}
 
+	// Returns true if point is inside the Rect
 	bool Rect::Contains(const Vec2& _point) const
 	{
 		const Vec2 min = Min();
@@ -53,6 +57,7 @@ namespace MathLib
 		return false;
 	}
 
+	// Return a hit pointer if the Rect collided with the point 
 	Hit* Rect::Intersects(const Vec2& _point) const
 	{
 		if (!Contains(_point))
@@ -92,6 +97,7 @@ namespace MathLib
 		};
 	}
 
+	// Returns a hit pointer if the Rect collided with another Rect
 	Hit* Rect::Intersects(const Rect& _rect) const
 	{
 		const Vec2 vec = _rect.center - center;
@@ -131,23 +137,28 @@ namespace MathLib
 		};
 	}
 
+	// Conversion operator
 	Rect::operator Rectangle()
 	{
 		return { center.x - extents.x, center.y - extents.y, extents.x * 2.f, extents.y * 2.f };
 	}
 
+	// Equality operator
 	bool Rect::operator==(const Rect& _other) const
 	{
 		return center == _other.center && extents == _other.extents;
 	}
 
+	// Inequality operator
 	bool Rect::operator!=(const Rect& _other) const
 	{
 		return !(*this == _other);
 	}
 
+	// Copy operator
 	Rect& Rect::operator=(const Rect& _other) = default;
 
+	// Move operator
 	Rect& Rect::operator=(Rect&& _other) noexcept
 	{
 		if (*this == _other)

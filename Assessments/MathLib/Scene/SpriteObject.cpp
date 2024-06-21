@@ -4,16 +4,19 @@
 
 namespace MathLib
 {
+	// Constructor
 	SpriteObject::SpriteObject(Texture2D* _texture)
 		: size{ 32.f, 32.f }, origin{ Vec2::half }, tint{ WHITE }, m_texture{ _texture }
 	{
 	}
 
+	// Get Texture
 	Texture2D* SpriteObject::GetTexture() const
 	{
 		return m_texture;
 	}
 
+	// Render object
 	void SpriteObject::OnRender()
 	{
 		if(m_texture != nullptr)

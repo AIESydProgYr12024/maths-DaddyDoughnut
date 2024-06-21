@@ -8,6 +8,7 @@
 
 using MathLib::Vec3;
 
+// Constructor
 TestLevel::TestLevel()
 	: ILevelBase("Test"),
 	  m_playerPos{ 0, 0 }, m_playerSpeed{ 0 },
@@ -23,6 +24,7 @@ TestLevel::TestLevel()
 {
 }
 
+// Destructor
 TestLevel::~TestLevel()
 {
 	delete m_world;
@@ -157,7 +159,6 @@ void TestLevel::Tick(float _dt)
 
 void TestLevel::Render()
 {
-	
 }
 
 void TestLevel::EndPlay()
@@ -165,4 +166,3 @@ void TestLevel::EndPlay()
 	// Unload Textures
 	Resources::UnloadAll();
 }
-
