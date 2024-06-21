@@ -166,7 +166,6 @@
     <ClCompile Include="ILevelBase.cpp" />
     <ClCompile Include="LevelManager.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Map.cpp" />
     <ClCompile Include="Resources.cpp" />
     <ClCompile Include="StringUtils.cpp" />
     <ClCompile Include="Tank.cpp" />
@@ -180,7 +179,6 @@
     <ClInclude Include="ConfigValue.h" />
     <ClInclude Include="ILevelBase.h" />
     <ClInclude Include="LevelManager.h" />
-    <ClInclude Include="Map.h" />
     <ClInclude Include="Resources.h" />
     <ClInclude Include="StringUtils.h" />
     <ClInclude Include="Tank.h" />

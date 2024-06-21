@@ -13,7 +13,6 @@
 #include "Tank.h"
 #include "Turret.h"
 #include "Bullet.h"
-#include "Map.h"
 
 using MathLib::Vec2;
 using MathLib::Mat3;
@@ -40,7 +39,7 @@ private:
 	Tank* m_tank;
 	Turret* m_turret;
 	vector<Bullet*> m_bullets;
-	Map* m_map;
+	SpriteObject* m_map;
 	Rect* m_wall1;
 	Rect* m_wall2;
 	Rect* m_wall3;

@@ -61,8 +61,9 @@ void TestLevel::BeginPlay()
 	m_turret->SetRadius(25.f);
 	m_turret->SetParent(m_tank);
 
-	m_map = new Map(Resources::GetTexture("map"));
-	m_map->SetRadius(400.f);
+
+	m_map = new SpriteObject(Resources::GetTexture("map"));
+	m_map->size = Vec2{ 800.f, 800.f };
 	m_map->UpdateTransform(
 		Mat3::CreateTranslation(
 			Vec3{
@@ -74,9 +75,7 @@ void TestLevel::BeginPlay()
 	);
 	m_map->SetParent(m_world);
 
-
 	m_playerSpeed = m_levelManager->GetConfig()->GetValue<float>("player", "speed");
-
 }
 
 void TestLevel::Tick(float _dt)
