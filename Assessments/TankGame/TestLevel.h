@@ -1,15 +1,14 @@
 #pragma once
 
 #include <vector>
-#include<cstdlib>
-
-#include "ILevelBase.h"
 
 #include "MathLib/Types/Vec2.h"
 #include "MathLib/Types/Mat3.h"
 #include "MathLib/Geometry/Rect.h"
 #include "MathLib/Scene/SceneObject.h"
 #include "MathLib/Geometry/Hit.h"
+
+#include "ILevelBase.h"
 #include "Tank.h"
 #include "Turret.h"
 #include "Bullet.h"
@@ -40,9 +39,6 @@ private:
 	Turret* m_turret;
 	vector<Bullet*> m_bullets;
 	SpriteObject* m_map;
-	Rect* m_wall1;
-	Rect* m_wall2;
-	Rect* m_wall3;
-	Rect* m_wall4;
+	vector<Rect*> m_walls;
 	bool m_canSpawn;
 };
