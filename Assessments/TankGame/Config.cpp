@@ -23,7 +23,7 @@ using MathLib::Vec2;
 InvalidValueException::InvalidValueException(const string& _value)
 	: value("Key not found: " + _value)
 {
-	
+
 }
 
 const char* InvalidValueException::what() const noexcept
@@ -168,7 +168,7 @@ void Config::HandleVector(const string& _category, const string& _id, const stri
 {
 	auto converter = [](const string& _val) -> float
 		{
-			return 0;
+			return std::stof(_val);
 		};
 
 	const vector<float> values = StringUtils::Split<float>(_value, ',', converter);

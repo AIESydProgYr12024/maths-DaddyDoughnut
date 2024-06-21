@@ -20,14 +20,14 @@ public:
 };
 
 template <typename T>
-vector<T> StringUtils::Split(const string& _string, char _deliminator, T(* _converter)(const string&))
+vector<T> StringUtils::Split(const string& _string, char _deliminator, T(*_converter)(const string&))
 {
 	vector<T> values;
 
 	string s;
-	for(const char c : _string)
+	for (const char c : _string)
 	{
-		if(c != _deliminator)
+		if (c != _deliminator)
 		{
 			s += c;
 		}
@@ -39,7 +39,7 @@ vector<T> StringUtils::Split(const string& _string, char _deliminator, T(* _conv
 		}
 	}
 
-	if(!s.empty())
+	if (!s.empty())
 	{
 		values.emplace_back(_converter(s));
 		s.clear();

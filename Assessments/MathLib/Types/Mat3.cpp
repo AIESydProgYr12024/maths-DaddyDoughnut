@@ -1,8 +1,8 @@
 // ReSharper disable CppClangTidyClangDiagnosticReorderCtor
 // ReSharper disable CppMemberInitializersOrder
 #include "MathLib/Types/Mat3.h"
-
 #include "MathLib/MathFunctions.h"
+
 #include <sstream>
 
 using std::stringstream;
@@ -36,6 +36,7 @@ namespace MathLib
 			data[i] = _matrix[i];
 	}
 
+	// translate matrix from a Vec3
 	Mat3 Mat3::CreateTranslation(const Vec3& _trans)
 	{
 		return
@@ -46,16 +47,19 @@ namespace MathLib
 		};
 	}
 
+	// translate matrix from two floats
 	Mat3 Mat3::CreateTranslation(float _x, float _y)
 	{
 		return CreateTranslation(Vec2{ _x, _y });
 	}
 
+	// translate matrix from three floats
 	Mat3 Mat3::CreateTranslation(float _x, float _y, float _z)
 	{
 		return CreateTranslation(Vec2{ _x, _y, _z });
 	}
 
+	// scale matrix from a Vec3
 	Mat3 Mat3::CreateScale(const Vec3& _scale)
 	{
 		return
@@ -66,21 +70,25 @@ namespace MathLib
 		};
 	}
 
+	// scale matrix from two floats
 	Mat3 Mat3::CreateScale(float _x, float _y)
 	{
 		return CreateScale(Vec2{ _x, _y });
 	}
 
+	// scale matrix from three floats
 	Mat3 Mat3::CreateScale(float _x, float _y, float _z)
 	{
 		return CreateScale(Vec3{ _x, _y, _z });
 	}
 
+	// create a euler rotation matrix  
 	Mat3 Mat3::CreateEulerRotation(float _x, float _y, float _z)
 	{
 		return CreateEulerRotation(Vec3{ _x, _y, _z });
 	}
 
+	// create a euler rotation matrix from a Vec3 
 	Mat3 Mat3::CreateEulerRotation(const Vec3& _euler)
 	{
 		const Mat3 x = CreateXRotation(_euler.x * DEG2RAD);
@@ -90,11 +98,13 @@ namespace MathLib
 		return x * y * z;
 	}
 
+	// return an identity matrix
 	Mat3 Mat3::Identity()
 	{
 		return { 1.f };
 	}
 
+	// transpose the matrix
 	Mat3 Mat3::Transposed()
 	{
 		return
@@ -105,6 +115,7 @@ namespace MathLib
 		};
 	}
 
+	// convert the matrix to a string
 	string Mat3::ToString() const
 	{
 		stringstream stream;
@@ -124,6 +135,7 @@ namespace MathLib
 		return stream.str();
 	}
 
+	// Copy constructor
 	Mat3::Mat3(const Mat3& _other) :
 		m1{ _other.m1 }, m4{ _other.m4 }, m7{ _other.m7 },
 		m2{ _other.m2 }, m5{ _other.m5 }, m8{ _other.m8 },
@@ -131,6 +143,7 @@ namespace MathLib
 	{
 	}
 
+	// Move constructor
 	Mat3::Mat3(Mat3&& _other) noexcept :
 		m1{ _other.m1 }, m4{ _other.m4 }, m7{ _other.m7 },
 		m2{ _other.m2 }, m5{ _other.m5 }, m8{ _other.m8 },
@@ -149,6 +162,7 @@ namespace MathLib
 
 	Mat3::~Mat3() = default;
 
+	// create a transformed matrix
 	Mat3 Mat3::CreateTransform(const Vec2& _trans, float _rot, const Vec2* _scale, float _xRot, float _yRot)
 	{
 		const Vec2 scale = _scale != nullptr ? *_scale : Vec2{ 1.f, 1.f };
@@ -164,6 +178,7 @@ namespace MathLib
 		return transMat * rotMat * scaleMat;
 	}
 
+	// create a translated matrix from a Vec2
 	Mat3 Mat3::CreateTranslation(const Vec2& _trans)
 	{
 		return
@@ -174,6 +189,7 @@ namespace MathLib
 		};
 	}
 
+	// create a scaled matrix from a Vec2
 	Mat3 Mat3::CreateScale(const Vec2& _scale)
 	{
 		return
@@ -184,6 +200,7 @@ namespace MathLib
 		};
 	}
 
+	// create an rotated matrix on the x axis 
 	Mat3 Mat3::CreateXRotation(float _rot)
 	{
 		const float cos = cosf(_rot);
@@ -197,6 +214,7 @@ namespace MathLib
 		};
 	}
 
+	// create an rotated matrix on the y axis 
 	Mat3 Mat3::CreateYRotation(float _rot)
 	{
 		const float cos = cosf(_rot);
@@ -211,6 +229,7 @@ namespace MathLib
 
 	}
 
+	// create an rotated matrix on the z axis 
 	Mat3 Mat3::CreateZRotation(float _rot)
 	{
 		const float cos = cosf(_rot);
@@ -224,6 +243,7 @@ namespace MathLib
 		};
 	}
 
+	// set rotation on the x axis
 	void Mat3::SetRotationX(float _rot)
 	{
 		const float yLen = sqrtf(m4 * m4 + m5 * m5 + m6 * m6);
@@ -238,11 +258,13 @@ namespace MathLib
 		m9 = cos * zLen;
 	}
 
+	// get rotation on the x axis
 	float Mat3::GetRotationX() const
 	{
 		return atan2(m2, m1);
 	}
 
+	// set rotation on the y axis
 	void Mat3::SetRotationY(float _rot)
 	{
 		const float xLen = sqrtf(m1 * m1 + m2 * m2 + m3 * m3);
@@ -257,11 +279,13 @@ namespace MathLib
 		m9 = cos * zLen;
 	}
 
+	// get rotation on the y axis
 	float Mat3::GetRotationY() const
 	{
 		return atan2f(-m4, m5);
 	}
 
+	// set rotation on the z axis
 	void Mat3::SetRotationZ(float _rot)
 	{
 		const float yLen = sqrtf(m4 * m4 + m5 * m5 + m6 * m6);
@@ -276,28 +300,33 @@ namespace MathLib
 		m5 = cos * yLen;
 	}
 
+	// get rotation on the z axis
 	float Mat3::GetRotationZ() const
 	{
 		return atan2f(m7, m9);
 	}
 
+	// set translation of the matrix
 	void Mat3::SetTranslation(const Vec2& _trans)
 	{
 		m7 = _trans.x;
 		m8 = _trans.y;
 	}
 
+	// set translation of the matrix
 	void Mat3::Translate(const Vec2& _trans)
 	{
 		m7 = _trans.x;
 		m8 = _trans.y;
 	}
 
+	// get translation of the matrix
 	Vec2 Mat3::GetTranslation()
 	{
 		return { m7, m8 };
 	}
 
+	// set scale of the matrix
 	void Mat3::SetScale(const Vec2& _scale)
 	{
 		const float xAlen = sqrtf(m1 * m1 + m2 * m2 + m3 * m3);
@@ -317,6 +346,7 @@ namespace MathLib
 		}
 	}
 
+	// get scale of the matrix
 	Vec2 Mat3::GetScale() const
 	{
 		const float xAlen = sqrtf(m1 * m1 + m2 * m2 + m3 * m3);
@@ -325,6 +355,7 @@ namespace MathLib
 		return { xAlen, yAlen };
 	}
 
+	// transform a point
 	Vec2 Mat3::TransformPoint(const Vec2& _point) const
 	{
 		return
@@ -334,6 +365,7 @@ namespace MathLib
 		};
 	}
 
+	// transform a vector
 	Vec2 Mat3::TransformVector(const Vec2& _vec) const
 	{
 		return
@@ -343,6 +375,7 @@ namespace MathLib
 		};
 	}
 
+	// multiply matrices
 	Mat3 Mat3::operator*(const Mat3& _rhs) const
 	{
 		return
@@ -361,6 +394,7 @@ namespace MathLib
 		};
 	}
 
+	// multiply matrix with vector
 	Vec3 Mat3::operator*(const Vec3& _rhs) const
 	{
 		return
@@ -370,6 +404,7 @@ namespace MathLib
 			m7 * _rhs.x + m8 * _rhs.y + m9 * _rhs.z
 		};
 	}
+
 
 	bool Mat3::operator==(const Mat3& _other) const
 	{
@@ -384,6 +419,7 @@ namespace MathLib
 		return !(*this == _other);
 	}
 
+	// copy operator
 	Mat3& Mat3::operator=(const Mat3& _other)
 	{
 		if (*this == _other)
@@ -402,6 +438,7 @@ namespace MathLib
 		return *this;
 	}
 
+	// move operator
 	Mat3& Mat3::operator=(Mat3&& _other) noexcept
 	{
 		if (*this == _other)

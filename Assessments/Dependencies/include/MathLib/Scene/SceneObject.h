@@ -19,7 +19,7 @@ namespace MathLib
 		void Render();
 
 		SceneObject* Parent() const;
-		void SetParent(SceneObject* _newParent);
+		void SetParent(SceneObject* _newParent, bool _deleteChild = false);
 
 		Mat3 Global();
 		Mat3 Local();
@@ -40,6 +40,6 @@ namespace MathLib
 
 	private:
 		void AddChild(SceneObject* _child);
-		void RemoveChild(SceneObject* _child);
+		void RemoveChild(SceneObject* _child, bool _deleteChild);
 	};
 }

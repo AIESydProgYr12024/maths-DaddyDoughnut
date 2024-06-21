@@ -4,8 +4,8 @@ using MathLib::Vec2;
 
 Bullet::Bullet(Texture2D* _texture)
 	: m_radius{ 0.f }, m_sprite{ new SpriteObject(_texture) },
-m_collider{ new MathLib::Rect(Vec2{ 50.f, 50.f }, Vec2{ 16.f, 16.f }) },
-m_hasCollided{ false }
+	m_collider{ new MathLib::Rect(Vec2{ 50.f, 50.f }, Vec2{ 16.f, 16.f }) },
+	m_hasCollided{ false }
 {
 	SetRadius(20.f);
 	m_sprite->SetParent(this);
@@ -13,13 +13,10 @@ m_hasCollided{ false }
 
 Bullet::~Bullet()
 {
-	m_sprite = nullptr;
-	delete m_sprite;
-
-	m_collider = nullptr;
 	delete m_collider;
-}
+	m_collider = nullptr;
 
+}
 void Bullet::SetRadius(const float _radius)
 {
 	m_radius = _radius;

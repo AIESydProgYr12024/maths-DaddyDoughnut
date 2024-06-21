@@ -1,5 +1,4 @@
 #include "MathLib/Types/Mat4.h"
-
 #include "MathLib/MathFunctions.h"
 
 #include <sstream>
@@ -39,6 +38,7 @@ namespace MathLib
 			data[i] = _matrix[i];
 	}
 
+	// create a translation matrix from a Vec3
 	Mat4 Mat4::CreateTranslation(const Vec3& _trans)
 	{
 		return
@@ -50,11 +50,13 @@ namespace MathLib
 		};
 	}
 
+	// create a translation matrix from three floats
 	Mat4 Mat4::CreateTranslation(float _x, float _y, float _z)
 	{
 		return CreateTranslation(Vec3{ _x, _y, _z });
 	}
 
+	// create a scale matrix from a Vec3
 	Mat4 Mat4::CreateScale(const Vec3& _scale)
 	{
 		return
@@ -66,11 +68,13 @@ namespace MathLib
 		};
 	}
 
+	// create a scale matrix from three floats
 	Mat4 Mat4::CreateScale(float _x, float _y, float _z)
 	{
 		return CreateScale(Vec3{ _x, _y, _z });
 	}
 
+	// create an rotated matrix on the x axis 
 	Mat4 Mat4::CreateXRotation(float _rot)
 	{
 		const float cos = cosf(_rot);
@@ -85,6 +89,7 @@ namespace MathLib
 		};
 	}
 
+	// create an rotated matrix on the y axis 
 	Mat4 Mat4::CreateYRotation(float _rot)
 	{
 		const float cos = cosf(_rot);
@@ -99,6 +104,7 @@ namespace MathLib
 		};
 	}
 
+	// create an rotated matrix on the z axis 
 	Mat4 Mat4::CreateZRotation(float _rot)
 	{
 		const float cos = cosf(_rot);
@@ -113,11 +119,13 @@ namespace MathLib
 		};
 	}
 
+	// create a euler rotation matrix
 	Mat4 Mat4::CreateEulerRotation(float _x, float _y, float _z)
 	{
 		return CreateEulerRotation(Vec3{ _x, _y, _z });
 	}
 
+	// create a euler rotation matrix from a Vec3 
 	Mat4 Mat4::CreateEulerRotation(const Vec3& _euler)
 	{
 		const Mat4 x = CreateXRotation(_euler.x * DEG2RAD);
@@ -127,11 +135,13 @@ namespace MathLib
 		return x * y * z;
 	}
 
+	// return an identity matrix
 	Mat4 Mat4::Identity()
 	{
 		return { 1.f };
 	}
 
+	// transpose the matrix
 	Vec4 Mat4::Transposed()
 	{
 		return
@@ -143,6 +153,7 @@ namespace MathLib
 		};
 	}
 
+	// convert the matrix to a string
 	string Mat4::ToString() const
 	{
 		std::stringstream stream;
@@ -162,6 +173,7 @@ namespace MathLib
 		return stream.str();
 	}
 
+	// Copy constructor
 	Mat4::Mat4(const Mat4& _other) :
 		m1{ _other.m1 }, m5{ _other.m5 }, m9{ _other.m9 }, m13{ _other.m13 },
 		m2{ _other.m2 }, m6{ _other.m6 }, m10{ _other.m10 }, m14{ _other.m14 },
@@ -170,6 +182,7 @@ namespace MathLib
 	{
 	}
 
+	// Move constructor
 	Mat4::Mat4(Mat4&& _other) noexcept :
 		m1{ _other.m1 }, m5{ _other.m5 }, m9{ _other.m9 }, m13{ _other.m13 },
 		m2{ _other.m2 }, m6{ _other.m6 }, m10{ _other.m10 }, m14{ _other.m14 },
@@ -196,6 +209,7 @@ namespace MathLib
 
 	Mat4::~Mat4() = default;
 
+	// set rotation on the x axis
 	void Mat4::SetRotationX(float _rot)
 	{
 		const float yLen = sqrtf(m5 * m5 + m6 * m6 + m7 * m7);
@@ -210,11 +224,13 @@ namespace MathLib
 		m11 = cos * zLen;
 	}
 
+	// get rotation on the x axis
 	float Mat4::GetRotationX() const
 	{
 		return atan2(m2, m1);
 	}
 
+	// set rotation on the y axis
 	void Mat4::SetRotationY(float _rot)
 	{
 		const float xLen = sqrtf(m1 * m1 + m2 * m2 + m3 * m3);
@@ -223,21 +239,23 @@ namespace MathLib
 		const float cos = cosf(_rot);
 		const float sin = sinf(_rot);
 
-		m6 = cos * xLen;
-		m10 = sin * zLen;
-		m7 = -sin * xLen;
+		m1 = cos * xLen;
+		m9 = sin * zLen;
+		m3 = -sin * xLen;
 		m11 = cos * zLen;
 	}
 
+	// get rotation on the y axis
 	float Mat4::GetRotationY() const
 	{
 		return atan2f(-m5, m6);
 	}
 
+	// set rotation on the z axis
 	void Mat4::SetRotationZ(float _rot)
 	{
-		const float yLen = sqrtf(m5 * m5 + m6 * m6 + m7 * m7);
-		const float xLen = sqrtf(m1 * m1 + m2 * m2 + m3 * m3);
+		const float yLen = sqrtf(m1 * m1 + m2 * m2 + m3 * m3);
+		const float xLen = sqrtf(m5 * m5 + m6 * m6 + m7 * m7);
 
 		const float cos = cosf(_rot);
 		const float sin = sinf(_rot);
@@ -248,11 +266,13 @@ namespace MathLib
 		m6 = cos * yLen;
 	}
 
+	// get rotation on the z axis
 	float Mat4::GetRotationZ() const
 	{
 		return atan2f(m9, m11);
 	}
 
+	// set translation of the matrix
 	void Mat4::SetTranslation(const Vec3& _trans)
 	{
 		m13 = _trans.x;
@@ -260,6 +280,7 @@ namespace MathLib
 		m15 = _trans.z;
 	}
 
+	// set translation of the matrix
 	void Mat4::Translate(const Vec3& _trans)
 	{
 		m13 = _trans.x;
@@ -267,37 +288,45 @@ namespace MathLib
 		m15 = _trans.z;
 	}
 
+	// get translation of the matrix
 	Vec3 Mat4::GetTranslation()
 	{
 		return { m13, m14, m15 };
 	}
 
+	// set scale of the matrix
 	void Mat4::SetScale(const Vec3& _scale)
 	{
-		const float xAlen = sqrtf(m1 * m1 + m2 * m2 + m3 * m3);
-		const float yAlen = sqrtf(m5 * m5 + m6 * m6 + m7 * m7);
-		const float zAlen = sqrtf(m9 * m9 + m10 * m10 + m11 * m11);
+		const float xAlen = sqrtf(m1 * m1 + m2 * m2 + m3 * m3 + m4 * m4);
+		const float yAlen = sqrtf(m5 * m5 + m6 * m6 + m7 * m7 + m8 * m8);
+		const float zAlen = sqrtf(m9 * m9 + m10 * m10 + m11 * m11 + m12 * m12);
 
 		if (xAlen > 0.f)
 		{
 			m1 = m1 / xAlen * _scale.x;
 			m2 = m2 / xAlen * _scale.x;
 			m3 = m3 / xAlen * _scale.x;
+			m4 = m4 / xAlen * _scale.x;
 		}
+
 		if (yAlen > 0.f)
 		{
 			m5 = m5 / yAlen * _scale.y;
 			m6 = m6 / yAlen * _scale.y;
 			m7 = m7 / yAlen * _scale.y;
+			m8 = m8 / yAlen * _scale.y;
 		}
+
 		if (zAlen > 0.f)
 		{
 			m9 = m9 / zAlen * _scale.z;
 			m10 = m10 / zAlen * _scale.z;
 			m11 = m11 / zAlen * _scale.z;
+			m12 = m12 / zAlen * _scale.z;
 		}
 	}
 
+	// get scale of the matrix
 	Vec3 Mat4::GetScale() const
 	{
 		const float xAlen = sqrtf(m1 * m1 + m2 * m2 + m3 * m3);
@@ -307,6 +336,7 @@ namespace MathLib
 		return { xAlen, yAlen, zAlen };
 	}
 
+	// multiply matrices
 	Mat4 Mat4::operator*(const Mat4& _rhs) const
 	{
 		return
@@ -333,6 +363,7 @@ namespace MathLib
 		};
 	}
 
+	// multiply matrix with vector
 	Vec4 Mat4::operator*(const Vec4& _rhs) const
 	{
 		return
@@ -358,6 +389,7 @@ namespace MathLib
 		return !(*this == _other);
 	}
 
+	// copy operator
 	Mat4& Mat4::operator=(const Mat4& _other)
 	{
 		if (*this == _other)
@@ -383,6 +415,7 @@ namespace MathLib
 		return *this;
 	}
 
+	// move operator
 	Mat4& Mat4::operator=(Mat4&& _other) noexcept
 	{
 		if (*this == _other)

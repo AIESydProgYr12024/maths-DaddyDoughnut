@@ -63,7 +63,7 @@ namespace MathLib
 
 		float Dot(const Vec2& _rhs);
 
-
+		
 
 	public:
 		float Dot(const Vec2& _rhs) const;

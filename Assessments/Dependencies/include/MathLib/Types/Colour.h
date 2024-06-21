@@ -32,9 +32,9 @@ namespace MathLib
 		void SetBlue(uint8_t _b);
 		void SetAlpha(uint8_t _a);
 
-		Colour BitShift();
+		uint32_t BitShift();
 
-	public:
+		public:
 		operator Color() const;
 
 		bool operator==(const Colour& _rhs) const;

@@ -38,11 +38,13 @@ namespace MathLib
 	{
 	}
 
+	// Copy constructor
 	Vec2::Vec2(const Vec2& _other)
 		: x{ _other.x }, y{ _other.y }
 	{
 	}
 
+	// Move constructor
 	Vec2::Vec2(Vec2&& _other) noexcept
 		: x{ _other.x }, y{ _other.y }
 	{
@@ -52,21 +54,25 @@ namespace MathLib
 
 	Vec2::~Vec2() = default;
 
+	// Adds two Vec2's
 	Vec2 Vec2::Add(const Vec2& _lhs, const Vec2& _rhs)
 	{
 		return { _lhs.x + _rhs.x, _lhs.y + _rhs.y };
 	}
 
+	// Subtracts _rhs vector from _lhs vector
 	Vec2 Vec2::Subtract(const Vec2& _lhs, const Vec2& _rhs)
 	{
 		return { _lhs.x - _rhs.x, _lhs.y - _rhs.y };
 	}
 
+	// Scales _lhs vector by _rhs float
 	Vec2 Vec2::Scale(const Vec2& _lhs, float _rhs)
 	{
 		return { _lhs.x * _rhs, _lhs.y * _rhs };
 	}
 
+	// Returns normalized vector
 	Vec2 Vec2::Normalised(const Vec2& _vec)
 	{
 		const float mag = _vec.Magnitude();
@@ -79,14 +85,15 @@ namespace MathLib
 		{
 			return Vec2{ _vec.x / mag, _vec.y / mag };
 		}
-
 	}
 
+	// Returns distance between 2 vectors
 	float Vec2::Distance(const Vec2& _a, const Vec2& _b)
 	{
 		return (_a - _b).Magnitude();
 	}
 
+	// Returns dot product 
 	float Vec2::Dot(const Vec2& _lhs, const Vec2& _rhs)
 	{
 		return (_lhs.x * _rhs.x) + (_lhs.y * _rhs.y);
@@ -97,29 +104,33 @@ namespace MathLib
 		return {};
 	}
 
+	// Creates a Vec2 that stores a rotation 
 	Vec2 Vec2::CreateRotationVector(float _radians)
 	{
 		return { cosf(_radians), sinf(_radians) };
 	}
 
+	// Returns dot product 
 	float Vec2::Dot(const Vec2& _rhs)
 	{
 		return (x * _rhs.x) + (y * _rhs.y);
 	}
 
+	// Returns vectors magnitude 
 	float Vec2::Magnitude() const
 	{
 		return sqrt((x * x) + (y * y));
 	}
 
+	// Returns vectors magnitude squared
 	float Vec2::MagnitudeSqr() const
 	{
 		return (x * x) + (y * y);
 	}
 
+	// Normalise vector
 	void Vec2::Normalise()
 	{
-
 		const float mag = Magnitude();
 
 		if (Compare(mag, 0.f))
@@ -132,9 +143,9 @@ namespace MathLib
 			x = x / mag;
 			y = y / mag;
 		}
-
 	}
 
+	// Returns normalized vector
 	Vec2 Vec2::Normalised() const
 	{
 		const float mag = Magnitude();
@@ -147,14 +158,15 @@ namespace MathLib
 		{
 			return Vec2{ x / mag, y / mag };
 		}
-
 	}
 
+	// Returns rotation of vector
 	float Vec2::Rotation() const
 	{
 		return atan2f(y, x);
 	}
 
+	// Rotates vector
 	void Vec2::Rotate(float _amount)
 	{
 		const float xRotated = x * cosf(_amount) - y * sinf(_amount);
@@ -164,6 +176,7 @@ namespace MathLib
 		y = yRotated;
 	}
 
+	// Rotates vector around a pivot
 	void Vec2::RotateAround(const Vec2& _pivot, float _amount)
 	{
 		x -= _pivot.x;
@@ -175,11 +188,13 @@ namespace MathLib
 		y -= _pivot.y;
 	}
 
+	// Returns string representation of the vector
 	string Vec2::ToString() const
 	{
 		return string("(") + std::to_string(x) + ", " + std::to_string(y) + string("(");
 	}
 
+	// Converts Vec2 to Vector2
 	Vec2::operator Vector2() const
 	{
 		return { x, y };
@@ -195,11 +210,13 @@ namespace MathLib
 		return !(*this == _other);
 	}
 
+	// Subtraction operator
 	Vec2 Vec2::operator-(const Vec2& _other) const
 	{
 		return { x - _other.x, y - _other.y };
 	}
 
+	// Subtract _other from this vector
 	Vec2& Vec2::operator-=(const Vec2& _other)
 	{
 		x -= _other.x;
@@ -208,11 +225,13 @@ namespace MathLib
 		return *this;
 	}
 
+	// Addition operator
 	Vec2 Vec2::operator+(const Vec2& _other) const
 	{
 		return { x + _other.x, y + _other.y };
 	}
 
+	// Add _other from this vector
 	Vec2& Vec2::operator+=(const Vec2& _other)
 	{
 		x += _other.x;
@@ -221,11 +240,13 @@ namespace MathLib
 		return *this;
 	}
 
+	// Scales vector by _other
 	Vec2 Vec2::operator*(float _other) const
 	{
 		return { x * _other, y * _other };
 	}
 
+	// Scales vector by _other
 	Vec2& Vec2::operator*=(float _other)
 	{
 		x *= _other;
@@ -234,11 +255,14 @@ namespace MathLib
 		return *this;
 	}
 
+	// Multiply operator
 	Vec2 Vec2::operator*(const Vec2& _other) const
 	{
 		return { x * _other.x, y * _other.y };
 	}
 
+
+	// Multiply operator
 	Vec2& Vec2::operator*=(const Vec2& _other)
 	{
 		x *= _other.x;
@@ -247,9 +271,9 @@ namespace MathLib
 		return *this;
 	}
 
+	// Copy operator
 	Vec2& Vec2::operator=(const Vec2& _other)
 	{
-
 		if (*this == _other)
 			return *this;
 
@@ -259,9 +283,9 @@ namespace MathLib
 		return *this;
 	}
 
+	// Move operator
 	Vec2& Vec2::operator=(Vec2&& _other) noexcept
 	{
-
 		if (*this == _other)
 			return *this;
 
@@ -276,13 +300,13 @@ namespace MathLib
 
 	Vec2& Vec2::operator=(Vector2 _other)
 	{
-
 		x = _other.x;
 		y = _other.y;
 
 		return *this;
 	}
 
+	// Scales _rhs vector by _lhs scalar
 	Vec2 operator*(float _lhs, const Vec2& _rhs)
 	{
 		return { _rhs.x * _lhs, _rhs.y * _lhs };

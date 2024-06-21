@@ -1,5 +1,4 @@
 #include "MathLib/Types/Vec3.h"
-
 #include "MathLib/Types/Vec2.h"
 #include "MathLib/MathFunctions.h"
 
@@ -43,38 +42,42 @@ namespace MathLib
 	{
 	}
 
+	// Copy constructor
 	Vec3::Vec3(const Vec3& _other)
 		: x{ _other.x }, y{ _other.y }
 	{
 	}
 
+	// Move constructor
 	Vec3::Vec3(Vec3&& _other) noexcept
 		: x{ _other.x }, y{ _other.y }
 	{
-
 		_other.x = 0.f;
 		_other.y = 0.f;
 		_other.z = 0.f;
-
 	}
 
 	Vec3::~Vec3() = default;
 
+	// Adds two Vec3's
 	Vec3 Vec3::Add(const Vec3& _lhs, const Vec3& _rhs)
 	{
 		return { _lhs.x + _rhs.x, _lhs.y + _rhs.y, _lhs.z + _rhs.z };
 	}
 
+	// Subtracts _rhs vector from _lhs vector
 	Vec3 Vec3::Subtract(const Vec3& _lhs, const Vec3& _rhs)
 	{
 		return { _lhs.x - _rhs.x, _lhs.y - _rhs.y, _lhs.z - _rhs.z };
 	}
 
+	// Scales _lhs vector by _rhs float
 	Vec3 Vec3::Scale(const Vec3& _lhs, float _rhs)
 	{
 		return { _lhs.x * _rhs, _lhs.y * _rhs, _lhs.z * _rhs };
 	}
 
+	// Returns normalized vector
 	Vec3 Vec3::Normalised(const Vec3& _vec)
 	{
 		const float mag = _vec.Magnitude();
@@ -89,16 +92,19 @@ namespace MathLib
 		}
 	}
 
+	// Returns distance between 2 vectors
 	float Vec3::Distance(const Vec3& _a, const Vec3& _b)
 	{
 		return (_a - _b).Magnitude();
 	}
 
+	// Returns dot product 
 	float Vec3::Dot(const Vec3& _lhs, const Vec3& _rhs)
 	{
 		return (_lhs.x * _rhs.x) + (_lhs.y * _rhs.y) + (_lhs.z * _rhs.z);
 	}
 
+	// returns cross product
 	Vec3 Vec3::Cross(const Vec3& _lhs, const Vec3& _rhs)
 	{
 		return
@@ -114,11 +120,13 @@ namespace MathLib
 		return {};
 	}
 
+	// Returns dot product 
 	float Vec3::Dot(const Vec3& _rhs) const
 	{
 		return (x * _rhs.x) + (y * _rhs.y) + (z * _rhs.z);
 	}
 
+	// returns cross product
 	Vec3 Vec3::Cross(const Vec3& _rhs) const
 	{
 		return
@@ -129,16 +137,19 @@ namespace MathLib
 		};
 	}
 
+	// Returns vectors magnitude 
 	float Vec3::Magnitude() const
 	{
 		return sqrtf((x * x) + (y * y) + (z * z));
 	}
 
+	// Returns vectors magnitude squared
 	float Vec3::MagnitudeSqr() const
 	{
 		return (x * x) + (y * y) + (z * z);
 	}
 
+	// Normalise vector
 	void Vec3::Normalise()
 	{
 		const float mag = Magnitude();
@@ -157,6 +168,7 @@ namespace MathLib
 		}
 	}
 
+	// Returns normalized vector
 	Vec3 Vec3::Normalised() const
 	{
 		const float mag = Magnitude();
@@ -171,11 +183,13 @@ namespace MathLib
 		}
 	}
 
+	// Returns string representation of the vector
 	string Vec3::ToString() const
 	{
 		return string("(") + std::to_string(x) + ", " + std::to_string(y) + ", " + std::to_string(z) + string("(");
 	}
 
+	// Converts Vec3 to Vector3
 	Vec3::operator Vector3() const
 	{
 		return { x, y, z };
@@ -191,11 +205,13 @@ namespace MathLib
 		return !(*this == _other);
 	}
 
+	// Subtraction operator
 	Vec3 Vec3::operator-(const Vec3& _other) const
 	{
 		return { x - _other.x, y - _other.y, z - _other.z };
 	}
 
+	// Subtract _other from this vector
 	Vec3& Vec3::operator-=(const Vec3& _other)
 	{
 		x -= _other.x;
@@ -205,11 +221,13 @@ namespace MathLib
 		return *this;
 	}
 
+	// Addition operator
 	Vec3 Vec3::operator+(const Vec3& _other) const
 	{
 		return { x + _other.x, y + _other.y, z + _other.z };
 	}
 
+	// Add _other from this vector
 	Vec3& Vec3::operator+=(const Vec3& _other)
 	{
 		x += _other.x;
@@ -219,11 +237,13 @@ namespace MathLib
 		return *this;
 	}
 
+	// Scales vector by _other
 	Vec3 Vec3::operator*(float _other) const
 	{
 		return { x * _other, y * _other, z * _other };
 	}
 
+	// Scales vector by _other
 	Vec3& Vec3::operator*=(float _other)
 	{
 		x *= _other;
@@ -233,6 +253,7 @@ namespace MathLib
 		return *this;
 	}
 
+	// Copy operator
 	Vec3& Vec3::operator=(const Vec3& _other)
 	{
 		if (*this == _other)
@@ -245,6 +266,7 @@ namespace MathLib
 		return *this;
 	}
 
+	// Move operator
 	Vec3& Vec3::operator=(Vec3&& _other) noexcept
 	{
 		if (*this == _other)
@@ -261,6 +283,7 @@ namespace MathLib
 		return *this;
 	}
 
+	// Scales _rhs vector by _lhs scalar
 	Vec3 operator*(float _lhs, const Vec3& _rhs)
 	{
 		return _rhs * _lhs;

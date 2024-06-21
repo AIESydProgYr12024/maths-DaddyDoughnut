@@ -27,7 +27,7 @@ void LevelManager::Tick(const float _dt)
 
 	m_openListChanges.clear();
 
-	for(const auto& level : m_openLevels)
+	for (const auto& level : m_openLevels)
 	{
 		level->GetWorld()->Tick(_dt);
 		level->Tick(_dt);
@@ -36,7 +36,7 @@ void LevelManager::Tick(const float _dt)
 
 void LevelManager::Render() const
 {
-	for(const auto& level : m_openLevels)
+	for (const auto& level : m_openLevels)
 	{
 		level->Render();
 		level->GetWorld()->Render();

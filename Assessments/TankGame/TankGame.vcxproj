@@ -172,7 +172,6 @@
     <ClCompile Include="Tank.cpp" />
     <ClCompile Include="TestLevel.cpp" />
     <ClCompile Include="Turret.cpp" />
-    <ClCompile Include="Wall.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h" />
@@ -187,7 +186,6 @@
     <ClInclude Include="Tank.h" />
     <ClInclude Include="TestLevel.h" />
     <ClInclude Include="Turret.h" />
-    <ClInclude Include="Wall.h" />
   </ItemGroup>
   <ItemGroup>
     <CopyFileToFolders Include="assets\config.xml">

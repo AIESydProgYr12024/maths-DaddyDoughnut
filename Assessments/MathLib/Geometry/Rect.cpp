@@ -98,7 +98,7 @@ namespace MathLib
 		const Vec2 overlap = _rect.extents + extents - Vec2{ fabsf(vec.x), fabsf(vec.y) };
 
 		if (overlap.x <= 0 || overlap.y <= 0)
-			return 0;
+			return nullptr;
 
 		Vec2 position = { 0.f };
 		Vec2 normal = { 0.f };

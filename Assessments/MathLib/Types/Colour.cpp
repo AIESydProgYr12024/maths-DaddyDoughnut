@@ -22,11 +22,13 @@ namespace MathLib
 		SetAlpha(_a);
 	}
 
+	// Copy constructor
 	Colour::Colour(const Colour& _other)
 		: value{ _other.value }
 	{
 	}
 
+	// Move constructor
 	Colour::Colour(Colour&& _other) noexcept
 		: value{ _other.value }
 	{
@@ -35,49 +37,52 @@ namespace MathLib
 
 	Colour::~Colour() = default;
 
+	// Returns the red component of the colour
 	uint8_t Colour::Red() const
 	{
 		return static_cast<uint8_t>(value >> 24);
 	}
 
+	// Returns the green component of the colour
 	uint8_t Colour::Green() const
 	{
 		return static_cast<uint8_t>((value >> 16) & 0xFF);
 	}
 
+	// Returns the blue component of the colour
 	uint8_t Colour::Blue() const
 	{
 		return static_cast<uint8_t>((value >> 8) & 0xFF);
 	}
 
+	// Returns the alpha component of the colour
 	uint8_t Colour::Alpha() const
 	{
 		return static_cast<uint8_t>(value);
 	}
 
+	// Sets the red component of the colour
 	void Colour::SetRed(uint8_t _r)
 	{
 		value = (value & 0x00FFFFFF) | (_r << 24);
 	}
 
+	// Sets the green component of the colour
 	void Colour::SetGreen(uint8_t _g)
 	{
 		value = (value & 0xFF00FFFF) | (_g << 16);
 	}
 
+	// Sets the blue component of the colour
 	void Colour::SetBlue(uint8_t _b)
 	{
 		value = (value & 0xFFFF00FF) | (_b << 8);
 	}
 
+	// Sets the alpha component of the colour
 	void Colour::SetAlpha(uint8_t _a)
 	{
 		value = (value & 0xFFFFFF00) | _a;
-	}
-
-	Colour Colour::BitShift()
-	{
-		return value >> 8;
 	}
 
 	Colour::operator Color() const
@@ -95,6 +100,7 @@ namespace MathLib
 		return !(*this == _rhs);
 	}
 
+	// Copy operator
 	Colour& Colour::operator=(const Colour& _other)
 	{
 		if (*this == _other)
@@ -105,6 +111,7 @@ namespace MathLib
 		return *this;
 	}
 
+	// Move operator
 	Colour& Colour::operator=(Colour&& _other) noexcept
 	{
 		if (*this == _other)
