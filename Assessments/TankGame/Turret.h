@@ -8,18 +8,24 @@ using MathLib::SpriteObject;
 using MathLib::SceneObject;
 using MathLib::Mat3;
 
+class TestLevel;
+
 class Turret : public SceneObject
 {
 public:
-	Turret(Texture2D* _texture);
-
+	Turret(Texture2D* _texture, int _speed, bool _canSpawn, TestLevel* _testLevel);
 public:
 	void SetRadius(const float _radius);
-	void Move(float _dt, float _speed);
+
+protected:
+	void OnTick(float _dt) override;
 
 private:
 	float m_radius;
 	SpriteObject* m_sprite;
+	int m_speed;
+	bool m_canSpawn;
+	TestLevel* m_level;
 };
 
 

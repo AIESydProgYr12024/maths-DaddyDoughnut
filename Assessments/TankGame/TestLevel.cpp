@@ -6,12 +6,9 @@
 
 #include <iostream>
 
-using MathLib::Vec3;
-
 // Constructor
 TestLevel::TestLevel()
-	: ILevelBase("Test"),
-	  m_playerPos{ 0, 0 }, m_playerSpeed{ 0 },
+	: ILevelBase("Test"), m_playerSpeed{ 0 },
       m_tank{ nullptr }, m_turret{ nullptr }, m_map{ nullptr },
 	  m_walls
 	  {
@@ -19,8 +16,7 @@ TestLevel::TestLevel()
 		  new Rect(Vec2{ 696.f, 365.f }, Vec2{ 40.f, 205.f }) ,
 		  new Rect(Vec2{ 558.f, 550.f }, Vec2{ 178.f, 20.f }) ,
 		  new Rect(Vec2{ 758, 735 }, Vec2{ 65, 40 })
-	  },
-	  m_canSpawn{ false }
+	  }
 {
 }
 
@@ -37,6 +33,22 @@ TestLevel::~TestLevel()
 	}
 }
 
+// Create bullet
+void TestLevel::CreateBullet()
+{
+	// Add a new bullet to the bullet list
+	m_bullets.emplace_back(new Bullet(Resources::GetTexture("bulletGreen")));
+
+	m_bullets.back()->SetRadius(12.f);
+
+	m_bullets.back()->UpdateTransform(m_turret->Global());
+	m_bullets.back()->UpdateTransform(
+		Mat3::CreateTranslation(Vec2::down * 80.f)
+	);
+
+	m_bullets.back()->SetParent(m_world);
+}
+
 void TestLevel::BeginPlay()
 {
 	// Get Screen Size
@@ -49,8 +61,11 @@ void TestLevel::BeginPlay()
 	Resources::LoadTexture2D("barrelGreenNew");
 	Resources::LoadTexture2D("bulletGreen");
 
+	// Get Player Speed
+	m_playerSpeed = m_levelManager->GetConfig()->GetValue<float>("player", "speed");
+
 	// Make Tank
-	m_tank = new Tank(Resources::GetTexture("tankGreen"));
+	m_tank = new Tank(Resources::GetTexture("tankGreen"), m_playerSpeed);
 	m_tank->SetRadius(50.f);
 	m_tank->UpdateTransform(
 		Mat3::CreateTranslation(
@@ -64,7 +79,7 @@ void TestLevel::BeginPlay()
 	m_tank->SetParent(m_world);
 
 	// Make Turret
-	m_turret = new Turret(Resources::GetTexture("barrelGreenNew"));
+	m_turret = new Turret(Resources::GetTexture("barrelGreenNew"), m_playerSpeed, false, this);
 	m_turret->SetRadius(25.f);
 	m_turret->SetParent(m_tank);
 
@@ -81,17 +96,10 @@ void TestLevel::BeginPlay()
 		)
 	);
 	m_map->SetParent(m_world);
-
-	// Get Player Speed
-	m_playerSpeed = m_levelManager->GetConfig()->GetValue<float>("player", "speed");
 }
 
 void TestLevel::Tick(float _dt)
 {
-	// Move Player
-	m_tank->Move(_dt, m_playerSpeed);
-	m_turret->Move(_dt, m_playerSpeed * 2);
-
 	// Loop Through Bullets
 	for(int i = 0; i < m_bullets.size(); ++i)
 	{
@@ -134,26 +142,6 @@ void TestLevel::Tick(float _dt)
 				--i;
 			}
 		}
-	}
-
-	// Spawn Bullet 
-	if (IsKeyUp(KEY_SPACE))
-		m_canSpawn = true;
-
-	if (IsKeyDown(KEY_SPACE) && m_canSpawn)
-	{
-		m_canSpawn = false;
-
-		m_bullets.emplace_back(new Bullet(Resources::GetTexture("bulletGreen")));
-
-		m_bullets.back()->SetRadius(12.f);
-
-		m_bullets.back()->UpdateTransform(m_turret->Global());
-		m_bullets.back()->UpdateTransform(
-			Mat3::CreateTranslation(Vec2::down * 80.f)
-		);
-
-		m_bullets.back()->SetParent(m_world);
 	}
 }
 
