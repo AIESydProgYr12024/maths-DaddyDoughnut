@@ -105,41 +105,44 @@ void TestLevel::Tick(float _dt)
 	{
 		if (m_bullets[i] != nullptr)
 		{
-			bool hasCollided = false;
-
-			// Move Bullet
-			m_bullets[i]->Move(_dt);
-
-			// Check If Bullet Out Of Bounds
-			if (
-			fabsf(m_bullets[i]->Global().GetTranslation().x) >= static_cast<float>(m_levelManager->GetConfig()->GetValue<int>("window", "width")) ||
-			fabsf(m_bullets[i]->Global().GetTranslation().y) >= static_cast<float>(m_levelManager->GetConfig()->GetValue<int>("window", "height")))
+			if(m_bullets[i]->Parent() != nullptr)
 			{
-				hasCollided = true;
-			}
-			else 
-			{
-				// Check If Bullet Has Collided
-				for (Rect* wall : m_walls)
+				bool hasCollided = false;
+
+				// Move Bullet
+				m_bullets[i]->Move(_dt);
+
+				// Check If Bullet Out Of Bounds
+				if (
+					fabsf(m_bullets[i]->Global().GetTranslation().x) >= static_cast<float>(m_levelManager->GetConfig()->GetValue<int>("window", "width")) ||
+					fabsf(m_bullets[i]->Global().GetTranslation().y) >= static_cast<float>(m_levelManager->GetConfig()->GetValue<int>("window", "height")))
 				{
-					Hit* wallHit = m_bullets[i]->GetCollider()->Intersects(*wall);
-					if (wallHit != nullptr)
+					hasCollided = true;
+				}
+				else
+				{
+					// Check If Bullet Has Collided
+					for (Rect* wall : m_walls)
 					{
-						hasCollided = true;
-						delete wallHit;
-						wallHit = nullptr;
+						Hit* wallHit = m_bullets[i]->GetCollider()->Intersects(*wall);
+						if (wallHit != nullptr)
+						{
+							hasCollided = true;
+							delete wallHit;
+							wallHit = nullptr;
+						}
 					}
 				}
-			}
 
-			// Delete Bullet If It Collided
-			if (hasCollided == true)
-			{
-				m_bullets[i]->SetParent(nullptr, true);
+				// Delete Bullet If It Collided
+				if (hasCollided == true)
+				{
+					m_bullets[i]->SetParent(nullptr, true);
 
-				m_bullets.erase(m_bullets.begin() + i);
+					m_bullets.erase(m_bullets.begin() + i);
 
-				--i;
+					--i;
+				}
 			}
 		}
 	}
