@@ -10,11 +10,12 @@ using MathLib::Vec2;
 class Wall final : public SceneObject
 {
 public:
+	Wall();
 	Wall(Vec2 _center, Vec2 _extents);
+	~Wall();
 
 public:
 	void Draw(Color _color);
-
 	Rect* GetCollider();
 
 private:

@@ -24,16 +24,18 @@ void Turret::OnTick(float _dt)
 {
 	const float rot = 240.f * _dt * DEG2RAD;
 
+	// Prevent Turret from shooting again
 	if (IsKeyUp(KEY_SPACE))
 		m_canSpawn = true;
 
+	// Shoot Turret
 	if (IsKeyDown(KEY_SPACE) && m_canSpawn)
 	{
-		m_canSpawn = true;
+		// Check if we can shoot
+		m_canSpawn = false;
 		
-		// spawn bullet some how
+		// spawn bullet 
 		m_level->CreateBullet();
-
 	}
 	
 	// Rotate turret
