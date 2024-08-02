@@ -20,6 +20,7 @@ using MathLib::Hit;
 #include "Tank.h"
 #include "Turret.h"
 #include "Bullet.h"
+#include "Wall.h"
 
 class Tank;
 class Turret;
@@ -45,6 +46,7 @@ private:
 	Tank* m_tank;
 	Turret* m_turret;
 	vector<Bullet*> m_bullets;
-	SpriteObject* m_map;
-	vector<Rect*> m_walls;
+	Wall* m_wall1;
+	Wall* m_wall2;
+	Wall* m_wall3;
 };

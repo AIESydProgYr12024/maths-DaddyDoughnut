@@ -9,14 +9,10 @@
 // Constructor
 TestLevel::TestLevel()
 	: ILevelBase("Test"), m_playerSpeed{ 0 },
-      m_tank{ nullptr }, m_turret{ nullptr }, m_map{ nullptr },
-	  m_walls
-	  {
-		  new Rect(Vec2{ 310.f, 185.f }, Vec2{ 115.f, 140.f }) ,
-		  new Rect(Vec2{ 696.f, 365.f }, Vec2{ 40.f, 205.f }) ,
-		  new Rect(Vec2{ 558.f, 550.f }, Vec2{ 178.f, 20.f }) ,
-		  new Rect(Vec2{ 758, 735 }, Vec2{ 65, 40 })
-	  }
+      m_tank{ nullptr }, m_turret{ nullptr },
+      m_wall1( new Wall(Vec2{300.f, 300.f}, Vec2{ 100.f, 100.f }) ),
+      m_wall2( new Wall(Vec2{100.f, 100.f}, Vec2{ 100.f, 100.f }) ),
+      m_wall3( new Wall(Vec2{ 700.f, 500.f }, Vec2{100.f, 300.f}) )
 {
 }
 
@@ -25,12 +21,6 @@ TestLevel::~TestLevel()
 {
 	delete m_world;
 	m_world = nullptr;
-
-	for(Rect* wall : m_walls)
-	{
-		delete wall;
-		wall = nullptr;
-	}
 }
 
 // Create bullet
@@ -82,20 +72,6 @@ void TestLevel::BeginPlay()
 	m_turret = new Turret(Resources::GetTexture("barrelGreenNew"), m_playerSpeed, false, this);
 	m_turret->SetRadius(25.f);
 	m_turret->SetParent(m_tank);
-
-	// Make Map
-	m_map = new SpriteObject(Resources::GetTexture("map"));
-	m_map->size = Vec2{ 800.f, 800.f };
-	m_map->UpdateTransform(
-		Mat3::CreateTranslation(
-			Vec3{
-				static_cast<float>(screenWidth) * .5f,
-				static_cast<float>(screenHeight) * .5f,
-				0.f
-			}
-		)
-	);
-	m_map->SetParent(m_world);
 }
 
 void TestLevel::Tick(float _dt)
@@ -122,16 +98,18 @@ void TestLevel::Tick(float _dt)
 				else
 				{
 					// Check If Bullet Has Collided
-					for (Rect* wall : m_walls)
+					
+					
+					Hit* wallHit1 = m_bullets[i]->GetCollider()->Intersects(*m_wall1->GetCollider());
+					Hit* wallHit2 = m_bullets[i]->GetCollider()->Intersects(*m_wall1->GetCollider());
+					Hit* wallHit3 = m_bullets[i]->GetCollider()->Intersects(*m_wall1->GetCollider());
+					if (wallHit1 != nullptr || wallHit2 != nullptr || wallHit3 != nullptr)
 					{
-						Hit* wallHit = m_bullets[i]->GetCollider()->Intersects(*wall);
-						if (wallHit != nullptr)
-						{
-							hasCollided = true;
-							delete wallHit;
-							wallHit = nullptr;
-						}
+						hasCollided = true;
+						delete wallHit1, wallHit2, wallHit3;
+						wallHit1, wallHit2, wallHit3 = nullptr;
 					}
+					
 				}
 
 				// Delete Bullet If It Collided
@@ -150,6 +128,9 @@ void TestLevel::Tick(float _dt)
 
 void TestLevel::Render()
 {
+	m_wall1->Draw(RED);
+	m_wall2->Draw(RED);
+	m_wall3->Draw(RED);
 }
 
 void TestLevel::EndPlay()
